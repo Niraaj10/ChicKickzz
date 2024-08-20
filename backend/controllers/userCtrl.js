@@ -62,6 +62,22 @@ const userCtrl = {
         } catch (error) {
             return res.status(500).json({'msg':error.message})
         }
+    },
+
+    login: async (req,res) => {
+        try {
+            const {email, password} = req.body
+
+            const user = await Users.findOne({email})
+            if(!user) return res.status(400).json({'msg':"User not found, Please Signup"})
+                
+            const matchedUser = await bcrypt.compare(password,user.password)
+            if(!matchedUser) return res.status(400).json({'msg':"Incorrect Password"})
+                
+            res.json({'msg':"Login Success"})
+        } catch (error) {
+            return res.status(500).json({'msg':error.message})
+        }
     }
 }
 
