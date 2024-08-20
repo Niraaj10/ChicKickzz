@@ -2,11 +2,16 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookiePar = require('cookie-parser');
 require('dotenv').config();
+const fileUpload = require('express-fileupload');
 
 const app = express();
 
 app.use(express.json());
 app.use(cookiePar());
+// app.use(fileUpload())
+app.use(fileUpload({
+    useTempFiles: true,
+}));
 
 const PORT = process.env.PORT || 5000;
 
@@ -22,6 +27,8 @@ app.get('/', (req,res) => {
 //Routes
 app.use('/user',require('./routes/useRouter'))
 app.use('/api',require('./routes/categoryRoutes'))
+app.use('/api',require('./routes/productRoutes'))
+app.use('/api',require('./routes/upload'))
 
 
 //connect to mongoDb
