@@ -90,6 +90,18 @@ const userCtrl = {
         } catch (error) {
             return res.status(500).json({'msg':error.message})
         }
+    },
+
+    logout: async (req,res) => {
+        try {
+            res.clearCookie(
+                'refToken',
+                {path:'/user/refTokenn'}
+            )
+            return res.json({'msg':"Logout Successfull"})
+        } catch (error) {
+            return res.status(500).json({'msg':error.message})
+        }
     }
 }
 
