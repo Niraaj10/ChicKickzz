@@ -1,10 +1,67 @@
+// const { query } = require('express');
 const Products = require('../models/productModel')
+
+
+class APIfeatures{
+    constructor(query,queryString){
+        this.query = query
+        this.queryString = queryString
+    }
+
+    filtering(){
+        const queryObj = {...this.queryString}
+        // console.log(queryObj)
+        const cuttFields = ['page','sort','limit']
+        cuttFields.forEach(fld => delete(queryObj[fld]))
+        // console.log(queryObj)
+
+        let queryStr = JSON.stringify(queryObj)
+        //filtering Regex
+        queryStr = queryStr.replace(/\b(gte|gt|lt|lte|regex)\b/g, match => '$' + match)
+
+        // console.log({queryObj,queryStr})
+
+        this.query.find(JSON.parse(queryStr))
+
+        return this
+    }
+
+    sorting(){
+        if (this.queryString.sort) {
+            const sortBy = this.queryString.sort.split(',').join('')
+            // console.log(sortBy)
+
+            this.query = this.query.sort(sortBy)
+
+        } else {
+            this.query = this.query.sort('-createAT')
+        }
+
+        return this
+    }
+
+    pagination(){
+        const page = this.queryString.page * 1 || 1;
+        // limit of products on one page
+        const limit = this.queryString.limit * 1 || 10;
+        const skip = (page-1) * limit;
+
+        this.query = this.query.skip(skip).limit(limit);
+
+        return this
+    }
+}
 
 const productCtrl = {
     getProducts: async (req,res) => {
         try {
-            const products = await Products.find()
-            res.json(products)
+            console.log(req.query);
+            const features = new APIfeatures(Products.find(),req.query).filtering().sorting().pagination()          
+            // const products = await Products.find()
+            const products = await features.query
+
+            // res.json(products)
+            res.json({result: products.length})
         } catch (error) {
             return res.status(500).json({'msg':error.message})
         }
