@@ -73,8 +73,20 @@ const userCtrl = {
                 
             const matchedUser = await bcrypt.compare(password,user.password)
             if(!matchedUser) return res.status(400).json({'msg':"Incorrect Password"})
+            
+            //jwt authentication
+            const accesstoken = createToken({id:user._id});
+            const refreshtoken = createRefToken({id:user._id});
+
+            //cookieee
+            res.cookie('refToken', refreshtoken, {
+                httpOnly:true,
+                path:'/user/refTokenn'
+                // path:'/user/ref_token'
+            });    
                 
-            res.json({'msg':"Login Success"})
+            // res.json({'msg':"Login Success"})
+            res.json({accesstoken})
         } catch (error) {
             return res.status(500).json({'msg':error.message})
         }
