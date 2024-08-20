@@ -21,6 +21,7 @@ app.get('/', (req,res) => {
 
 //Routes
 app.use('/user',require('./routes/useRouter'))
+app.use('/api',require('./routes/categoryRoutes'))
 
 
 //connect to mongoDb
