@@ -60,8 +60,8 @@ const productCtrl = {
             // const products = await Products.find()
             const products = await features.query
 
-            // res.json(products)
-            res.json({result: products.length})
+            res.json(products)
+            // res.json({result: products.length})
         } catch (error) {
             return res.status(500).json({'msg':error.message})
         }

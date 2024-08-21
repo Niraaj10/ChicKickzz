@@ -29,8 +29,8 @@ const Navbar = () => {
                 </div>
                 </Link>
 
-                <div className='flex justify-between gap-7 items-center'>
-                    <Link to='/search'>
+                <div className='flex justify-between gap-2 md:gap-7 lg:gap-7 items-center'>
+                    <Link to='/search' className='hidden lg:block md:block'>
                     <div className='flex justify-center items-center'>
                         <FaSearch size={18} />
                     </div>

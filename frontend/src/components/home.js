@@ -4,7 +4,7 @@ import Navbar from './Navbar'
 const home = () => {
     return (
         <>
-            <Navbar />
+            {/* <Navbar /> */}
 
             <div>
                 Home
