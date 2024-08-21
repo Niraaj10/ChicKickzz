@@ -7,6 +7,7 @@ import Login from './components/Login/loginn';
 import Signup from './components/Login/signup';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { DataProvider } from './GlobalState';
+import ProductDetails from './components/Products/ProductDetails';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
               <Route path='/login' element={<Login />} />
               <Route path='/signup' element={<Signup />} />
               <Route path='/cart' element={<Cart />} />
+              <Route path='/products/detail/:id' element={<ProductDetails />} />
 
             </Routes>
 
