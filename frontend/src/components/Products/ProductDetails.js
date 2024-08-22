@@ -7,7 +7,10 @@ const ProductDetails = () => {
     const params = useParams();
 
     const state = useContext(GlobalState)
-    const [products] = state.productAPI.products
+    const [products] = state.productAPI.products;
+    // console.log(state.userAPI)
+    const addToCart = state.userAPI.addToCart;
+
 
     useEffect(() => {
         if (params) {
@@ -21,7 +24,7 @@ const ProductDetails = () => {
 
     if (proDetails.length === 0) return null;
 
-    console.log(proDetails)
+    // console.log(proDetails)
     return (
         <>
             <div>
@@ -42,9 +45,10 @@ const ProductDetails = () => {
 
                         <div>
                             <h5 className='text-red-500'>₹ {proDetails.price}.00</h5>
-                            <Link to='/cart'>
+                            <Link to='/cart' onClick={() => addToCart(proDetails)}>
                                 Add to cart
                             </Link>
+                            {/* <button onClick={() => addToCart(proDetails)}>Add to cart</button> */}
                         </div>
                     </div>
                 </div>

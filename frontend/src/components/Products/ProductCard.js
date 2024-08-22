@@ -1,10 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ProductCard = ({product}) => {
+const ProductCard = ({ product, isAdmin}) => {
     // console.log(product)
   return (
     <div className='ProductCard flex flex-col'>
+
+      {
+        isAdmin && <>
+            <input type="checkbox" checked={product.checked} />
+        </>
+      }
+
         <div>
       <img src={product.images.url} alt="" className='w-[19vw]'/>
         </div>
@@ -15,6 +22,7 @@ const ProductCard = ({product}) => {
         {/* <span>₹ {product.price}.00</span> */}
         <p>{product.description}</p>
       </div>
+
 
       <div>
         <Link to={`detail/${product._id}`}>

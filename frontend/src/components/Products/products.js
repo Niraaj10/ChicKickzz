@@ -5,6 +5,7 @@ import ProductCard from './ProductCard'
 const Products = () => {
   const state = useContext(GlobalState)
   const [productss] = state.productAPI.products
+  const [isAdmin] = state.userAPI.isAdmin
 
   // console.log(state)
   return (
@@ -18,7 +19,7 @@ const Products = () => {
         <div className=' flex gap-9 flex-wrap  justify-center '>
           {
             productss.map(pro => {
-              return <ProductCard key={pro._id} product={pro} />
+              return <ProductCard key={pro._id} product={pro} isAdmin={isAdmin} />
             })
           }
         </div>

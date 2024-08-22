@@ -15,7 +15,7 @@ export const DataProvider = ({ children }) => {
         // const res = await axios.get('/user/refTokenn')
         const res = await axios.post('/user/refTokenn')
 
-        console.log(res)
+        // console.log(res)
         setToken(res.data.accesstoken)
     }
 
@@ -31,6 +31,7 @@ export const DataProvider = ({ children }) => {
         productAPI: ProductAPI(),
         userAPI: UserAPI(token)
     }
+    // console.log(UserAPI)
 
     return (
         <GlobalState.Provider value={state}>
