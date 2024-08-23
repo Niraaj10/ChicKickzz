@@ -79,7 +79,7 @@ const productCtrl = {
 
             const newProduct = new Products({
                 product_id,
-                title: title.toLowerCase(),
+                title: title.toUpperCase(),
                 price,
                 description,
                 content,

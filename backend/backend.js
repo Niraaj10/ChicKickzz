@@ -11,6 +11,7 @@ app.use(cookiePar());
 // app.use(fileUpload())
 app.use(fileUpload({
     useTempFiles: true,
+    tempFileDir: '/tmp/'
 }));
 
 const PORT = process.env.PORT || 5000;

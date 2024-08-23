@@ -62,19 +62,19 @@ const Signup = () => {
 
         <div className='h-[50vh]  mx-auto flex gap-11 my-7 mt-3 rounded-3xl p-4'>
 
-          <div className='basis-[50%] py-1 px-12'>
+          <div className='basis-[50%] mx-auto py-1 md:px-12 lg:px-12'>
 
             <div className='text-2xl font-bold mb-5'>Signup</div>
 
             <form onSubmit={signupSubmit} className='flex flex-col gap-5'>
-              <input type='text' value={user.name} name='name' placeholder='Name' required onChange={onChangeInput} className='p-3 rounded-xl mx-11' />
-              <input type='email' value={user.email} name='email' placeholder='Email' required onChange={onChangeInput} className='p-3 rounded-xl mx-11' />
-              <input type='password' value={user.password} name='password' placeholder='Password' required onChange={onChangeInput} className='p-3 rounded-xl mx-11' />
+              <input type='text' value={user.name} name='name' placeholder='Name' required onChange={onChangeInput} className='p-3 rounded-xl lg:mx-11' />
+              <input type='email' value={user.email} name='email' placeholder='Email' required onChange={onChangeInput} className='p-3 rounded-xl lg:mx-11' />
+              <input type='password' value={user.password} name='password' placeholder='Password' required onChange={onChangeInput} className='p-3 rounded-xl lg:mx-11' />
 
-              <button type='submit' className='my-4 p-3 rounded-xl mx-11 bg-black text-white font-bold'>Create new userr</button>
+              <button type='submit' className='my-4 p-3 rounded-xl lg:mx-11 bg-black text-white font-bold'>Create new userr</button>
             </form>
 
-            <div className='mx-12 font-semibold flex flex-col'>
+            <div className='lg:mx-12 font-semibold flex flex-col'>
               already have an Account??
               <Link to='/login' className='text-[#4A69E2] font-bold'>
               Login
@@ -84,7 +84,7 @@ const Signup = () => {
           </div>
 
 
-          <div className='bg-white basis-[50%] p-6 px-14 rounded-3xl'>
+          <div className='bg-white hidden md:block lg:block basis-[50%] p-6 px-14 rounded-3xl'>
 
             <div className='text-3xl font-bold mb-4'>Join CHICKICKS Club Get Rewarded Today.</div>
 
