@@ -109,9 +109,18 @@ const productCtrl = {
             const { title, price, description, content, images, category} = req.body
 
             if(!images) return res.status(400).json({'msg':"Please upload image"})
+            
+                //    await Products.updateMany({
+            //         title,
+            //         price,
+            //         description,
+            //         content,
+            //         images,
+            //         category
+            //      })
 
              await Products.findByIdAndUpdate({_id:req.params.id},{
-                title: title.toLowerCase(),
+                title,
                 price,
                 description,
                 content,

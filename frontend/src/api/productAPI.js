@@ -6,7 +6,8 @@ const ProductAPI = () => {
     const [products,setProducts]=useState([])
 
     const getProducts = async()=> {
-        const res = await axios.get('/api/products')
+        // const res = await axios.get('/api/products')
+        const res = await axios.get('/api/products?sort=createdAt')
         // console.log(res.data)
         // setProducts(res.data.products)
         setProducts(res.data)
