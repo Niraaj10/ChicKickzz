@@ -19,7 +19,7 @@ const Login = () => {
     try {
       await axios.post('/user/login',{...user})
       // console.log({...user})
-      // console.log(user)
+      console.log(user)
 
       localStorage.setItem('Login User', true)
 
@@ -35,7 +35,7 @@ const Login = () => {
 
   return (
     <>
-      <div>
+      <div className='Login mt-[140px]'>
       Loginnnn
 
         <form onSubmit={loginSubmit} className='flex flex-col gap-2'>

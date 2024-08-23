@@ -52,6 +52,7 @@ const userCtrl = {
             const rf_token = req.cookies.refToken;
     
             if(!rf_token) return res.status(400).json({"msg":"Please Login or Signuppp"});
+            // if(!rf_token) return res.status(300).json({"msg":"Please Login or Signuppp"});
     
             jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err,user) => {
                 if(err) return res.status(400).json({"msg":"Please Login or Signup"});
@@ -63,6 +64,8 @@ const userCtrl = {
             return res.status(500).json({'msg':error.message})
         }
     },
+
+
 
     login: async (req,res) => {
         try {

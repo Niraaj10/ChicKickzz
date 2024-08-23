@@ -18,7 +18,7 @@ const Navbar = () => {
     const [isAdmin, setIsAdmin] = state.userAPI.isAdmin
     const [cart] = state.userAPI.cart;
 
-    // console.log(cart)
+    console.log(isLogged)
 
 
     const adminRoutes = () => {

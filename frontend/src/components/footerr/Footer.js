@@ -33,7 +33,7 @@ const Footer = () => {
                 </div>
 
 
-                <div className='bg-black relative z-10 h-[40vh] rounded-t-[2rem] md:rounded-t-[3rem] lg:rounded-t-[3rem] flex gap-32 pt-10'>
+                <div className='bg-black relative z-10 h-[40vh] rounded-t-[2rem] md:rounded-t-[3rem] lg:rounded-t-[3rem] flex gap-32 pt-10 px-12'>
 
                         <div className='text-white basis-[60%]'>
                             <div className='text-[#FFA52F] font-bold text-3xl mb-4'>About us</div>

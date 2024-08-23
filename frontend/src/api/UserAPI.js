@@ -14,7 +14,7 @@ const UserAPI = (token) => {
                         headers: {Authorization: token}
                     })
 
-                    // console.log(res)
+                    console.log(res)
 
                     setIsLogged(true)
                     res.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false)
@@ -25,6 +25,11 @@ const UserAPI = (token) => {
             getUser()
         }
     }, [token]);
+
+
+
+
+
 
 
     const addToCart = (product) => {
@@ -46,7 +51,7 @@ const UserAPI = (token) => {
 
 
   return {
-    isLogged: [isLogged, setIsAdmin],
+    isLogged: [isLogged, setIsLogged],
     isAdmin: [isAdmin, setIsAdmin],
     cart : [cart, setCart],
     addToCart: addToCart,
