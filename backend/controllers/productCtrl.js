@@ -69,7 +69,7 @@ const productCtrl = {
     
     createProducts: async (req,res) => {
         try {
-            const {product_id, title, price, description, content, images, category} = req.body
+            const {product_id, title, price, description, content, images, category,size} = req.body
 
             if(!images) return res.status(400).json({'msg':"Please upload images"})
 
@@ -84,6 +84,7 @@ const productCtrl = {
                 description,
                 content,
                 images,
+                size,
                 category
             })
 
@@ -106,18 +107,19 @@ const productCtrl = {
     
     updateProducts: async (req,res) => {
         try {
-            const { title, price, description, content, images, category} = req.body
+            const { title, price, description, content, size, images, category} = req.body
 
             if(!images) return res.status(400).json({'msg':"Please upload image"})
             
                 //    await Products.updateMany({
-            //         title,
-            //         price,
-            //         description,
-            //         content,
-            //         images,
-            //         category
-            //      })
+                //     title,
+                //     price,
+                //     description,
+                //     content,
+                //     images,
+                //      size,  
+                //     category
+                //  })
 
              await Products.findByIdAndUpdate({_id:req.params.id},{
                 title,
@@ -125,6 +127,7 @@ const productCtrl = {
                 description,
                 content,
                 images,
+                size,
                 category
              })  
 

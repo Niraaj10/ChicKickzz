@@ -7,6 +7,7 @@ import { FaUser } from 'react-icons/fa6'
 import { FaSearch } from 'react-icons/fa'
 import { GlobalState } from '../GlobalState'
 import axios from 'axios'
+import { HiOutlineLogout } from 'react-icons/hi'
 // import { Link } from 'react-router-dom'
 
 
@@ -33,8 +34,11 @@ const Navbar = () => {
     const loggedRoutes = () => {
         return (
             <>
-                <li><Link to='/history'>History</Link></li>
-                <li><Link to='/' onClick={logoutUser}>Logout</Link></li>
+                {/* <li><Link to='/history'>History</Link></li> */}
+                <Link to='/' onClick={logoutUser}>
+                    {/* logout */}
+                    <HiOutlineLogout size={26} />
+                </Link>
             </>
         )
     }

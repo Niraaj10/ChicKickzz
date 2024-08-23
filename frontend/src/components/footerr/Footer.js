@@ -10,7 +10,7 @@ const Footer = () => {
     return (
         <>
             {/* Footer */}
-            <footer className='Footerr bg-[#4A69E2] rounded-t-[2rem] md:rounded-t-[3rem] lg:rounded-t-[3rem] h-[84vh] w-[90vw] mx-auto'>
+            <footer className='Footerr mt-24 bg-[#4A69E2] rounded-t-[2rem] md:rounded-t-[3rem] lg:rounded-t-[3rem] h-[84vh] w-[90vw] mx-auto'>
 
                 <div className='h-[44vh] '>
                     <div>
