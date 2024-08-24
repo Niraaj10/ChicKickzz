@@ -19,6 +19,33 @@ const Cart = () => {
   console.log(cart)
 
 
+  const IncQnt = (proId) => {
+    const updatedCart = cart.map(pro =>
+      pro._id === proId
+        ? { ...pro, quantity: pro.quantity + 1 }
+        : pro
+    );
+    setCart(updatedCart);
+  };
+
+
+  const DncQnt = (proId) => {
+    const updatedCart = cart.map(pro =>
+      pro._id === proId
+        ? pro.quantity > 1
+          ? { ...pro, quantity: pro.quantity - 1 }
+          : pro // If quantity is 1, don't decrease it further
+        : pro
+    );
+    setCart(updatedCart);
+  };
+
+  const removePr = (proId) => {
+    const updatedCart = cart.filter(pro => pro._id !== proId);
+    setCart(updatedCart);
+  };
+
+
 
   return (
     <>
@@ -92,7 +119,7 @@ const Cart = () => {
             <div className='text-2xl font-bold'>ORDER SUMMARY</div>
             {/* totallll : {calGST(tPrice)} */}
 
-            <div className='px-4 mt-5'>
+            <div className='px-4 mt-5 flex flex-col gap-3 justify-evenly'>
 
               <div className='flex justify-between '>
                 <div className=''>{totalItems} ITEMS</div>
@@ -109,13 +136,13 @@ const Cart = () => {
                 <div>GST:{calGST(tPrice)}</div>
               </div>
 
-              <div className='flex justify-between '>
+              <div className='flex justify-between mt-5 border-t-gray-300 border-2 pt-3 text-lg font-bold '>
                 <div className=''>Total</div>
-                <div></div>
+                <div>{calGST(tPrice) + tPrice}</div>
               </div>
 
               {/* <button>CHECKOUT</button> */}
-              <button className=''>BUY NOW</button>
+              <button className='bg-black font-bold text-white w-full p-3 rounded-xl '>BUY NOW</button>
             </div>
 
           </div>
