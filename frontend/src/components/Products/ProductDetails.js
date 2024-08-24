@@ -23,7 +23,7 @@ const ProductDetails = () => {
         }
     }, [params, products])
 
-    console.log(proDetails.images)
+    // console.log(proDetails.images)
 
     if (proDetails.length === 0) return null;
 
@@ -78,7 +78,7 @@ const ProductDetails = () => {
                             </Link>
                                 </div>
 
-                            {/* <button onClick={() => addToCart(proDetails)}>Add to cart</button> */}
+                            <button onClick={() => addToCart(proDetails)}>Add to cart</button>
                         </div>
                     </div>
                 </div>

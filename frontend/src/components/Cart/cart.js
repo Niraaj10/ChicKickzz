@@ -16,17 +16,26 @@ const Cart = () => {
   };
 
 
-  console.log(cart)
+  // console.log(cart)
 
 
+  // const IncQnt = (proId) => {
+  //   const updatedCart = cart.map(pro =>
+  //     pro._id === proId
+  //       ? { ...pro, quantity: pro.quantity + 1 }
+  //       : pro
+  //   );
+  //   setCart(updatedCart);
+  // };
   const IncQnt = (proId) => {
-    const updatedCart = cart.map(pro =>
-      pro._id === proId
-        ? { ...pro, quantity: pro.quantity + 1 }
-        : pro
-    );
-    setCart(updatedCart);
-  };
+    // console.log(proId)    
+    setCart(cart => cart.map(pro =>
+        pro._id === proId
+            ? { ...pro, quantity: pro.quantity + 1 }
+            : pro
+    ));
+};
+
 
 
   const DncQnt = (proId) => {
@@ -99,9 +108,9 @@ const Cart = () => {
                             <div className='flex flex-col justify-center items-center gap-2 w-fit text-sm font-bold'>
                               Quantity
                               <div className='flex justify-center items-center border border-black rounded-lg'>
-                                <button className='p-1 font-bold text-xl rounded-lg px-3'>+</button>
+                                <button className='p-1 font-bold text-xl rounded-lg px-3' onClick={() => IncQnt(pro._id)}>+</button>
                                 <div className='p-1 px-5 font-bold border border-r-black border-l-black h-full pt-2'>{pro.quantity}</div>
-                                <button className='p-1 font-bold text-xl rounded-lg px-3'>-</button>
+                                <button className='p-1 font-bold text-xl rounded-lg px-3' onClick={() => DncQnt(pro._id)}>-</button>
                               </div>
                             </div>
                           </div>

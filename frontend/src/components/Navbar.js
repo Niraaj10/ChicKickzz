@@ -20,7 +20,7 @@ const Navbar = () => {
     const [cart] = state.userAPI.cart;
     const totalItems = cart.reduce((total, product) => total + product.quantity, 0);
 
-    console.log(isLogged)
+    // console.log(isLogged)
 
 
     const adminRoutes = () => {
