@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { GlobalState } from '../../GlobalState'
 import { Link } from 'react-router-dom'
 import fire from '../img/fire.png'
+import Footer from '../footerr/Footer'
 
 const Cart = () => {
   const state = useContext(GlobalState)
@@ -124,8 +125,11 @@ const Cart = () => {
 
           </div>
 
-          <div className='basis-[30%] relative px-6  p-9'>
-            <div className='text-2xl font-bold'>ORDER SUMMARY</div>
+          <div className='basis-[30%] relative px-6  p-9 '>
+            <div className='sticky top-44'>
+
+            
+            <div className='text-2xl font-bold '>ORDER SUMMARY</div>
             {/* totallll : {calGST(tPrice)} */}
 
             <div className='px-4 mt-5 flex flex-col gap-3 justify-evenly'>
@@ -153,11 +157,14 @@ const Cart = () => {
               {/* <button>CHECKOUT</button> */}
               <button className='bg-black font-bold text-white w-full p-3 rounded-xl '>BUY NOW</button>
             </div>
-
+            </div>
           </div>
 
 
         </div>
+
+
+        <Footer />
 
       </div>
     </>
