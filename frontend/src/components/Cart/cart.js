@@ -1,25 +1,79 @@
 import React, { useContext } from 'react'
 import { GlobalState } from '../../GlobalState'
+import { Link } from 'react-router-dom'
+import fire from '../img/fire.png'
 
 const Cart = () => {
   const state = useContext(GlobalState)
-  const [cart] = state.userAPI.cart
+  const [cart, setCart] = state.userAPI.cart
 
-  // console.log(cart)
+  const totalItems = cart.reduce((total, pro) => total + pro.quantity, 0);
+
+  const tPrice = cart.reduce((total, pro) => total + pro.price * pro.quantity, 0);
+  const calGST = (tPrice) => {
+    const gstRate = 0.12; // 12% GST
+    return tPrice * gstRate;
+  };
+
+
+  console.log(cart)
+
+
+
   return (
-    <div>
-      <div>
-        {
-          cart.map(pro => (
+    <>
+      <div className='Cart mt-[140px]'>
 
-            <ul>
-              <li>{pro.title}</li>
-              <li></li>
-            </ul>
-          ))
-        }
+        <div className='mt-44 mx-5'>
+          {/* <div className='text-3xl font-bold mt-16 '>Saving to celebrate</div> */}
+          <div className='text-3xl font-bold mt-16 '>YOUR BAG</div>
+          {/* <p>Enjoy up to 60% off thousands of style during the End of Year sale - while supplies last</p> */}
+          <div className='text-sm font-semibold pl-5 text-gray-500'>ITEMS : {totalItems}</div>
+        </div>
+
+        <div className='flex mt-9 mx-9 justify-center gap-11'>
+
+          <div className='bg-white basis-[70%] p-7 px-9 rounded-3xl'>
+            {
+              cart.length === 0 ? <>
+                <div className='h-[40vh] flex flex-col gap-8 justify-center items-center'>
+                  <div className='text-4xl font-bold'>YOUR BAG IS EMPTY
+
+                    <p className='text-sm font-normal mt-1 mx-4'>Please add Products to your bag</p>
+                  </div>
+
+                  <Link to='/products' className='flex justify-center items-center font-bold bg-black text-white p-4 px-8 rounded-2xl'>
+                    New Drops <img src={fire} alt="" className='w-[34px] ml-[-5px] mt-[-4px]' />
+                  </Link>
+                </div>
+
+              </>
+
+                : <>
+                  <div className='flex flex-col gap-7'>
+
+
+                    {
+                      cart.map(pro => (
+                        
+                      ))
+                    }
+                  </div>
+                </>
+            }
+
+          </div>
+
+          <div className='basis-[30%] relative px-6  p-9'>
+            
+
+          </div>
+
+
+        </div>
+
       </div>
-    </div>
+    </>
   )
 }
 

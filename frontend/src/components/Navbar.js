@@ -18,6 +18,7 @@ const Navbar = () => {
     const [isLogged, setIsLogged] = state.userAPI.isLogged
     const [isAdmin, setIsAdmin] = state.userAPI.isAdmin
     const [cart] = state.userAPI.cart;
+    const totalItems = cart.reduce((total, product) => total + product.quantity, 0);
 
     console.log(isLogged)
 
@@ -97,7 +98,8 @@ const Navbar = () => {
                         isAdmin ? '' : (
                             <Link to="/cart">
                                 <div className='bg-[#FFA52F] p-0 px-2 rounded-full'>
-                                    {cart.length}
+                                    {/* {cart.length} */}
+                                    {cart.reduce((total, product) => total + product.quantity, 0)}
                                 </div>
                             </Link>
                         )
