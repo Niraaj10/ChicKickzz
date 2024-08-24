@@ -55,7 +55,31 @@ const Cart = () => {
 
                     {
                       cart.map(pro => (
-                        
+                        <div className='flex gap-2'>
+
+                          <div className='basis-[30%]'>
+                            <img src={pro.images[0].url} alt="" className='w-[15vw] h-[35vh] rounded-2xl object-cover' loading='lazy' />
+                          </div>
+
+                          <div className='basis-[45%] flex flex-col justify-between my-6'>
+                            <div className='text-xl font-bold'>{pro.title.toUpperCase()}</div>
+                            <div>{pro.description}</div>
+                          </div>
+
+                          <div className='basis-[25%] flex flex-col justify-evenly my-6 items-center'>
+                            <div className='text-[#4A69E2] text-2xl font-bold'>₹ {pro.price}.00</div>
+
+                            <div className='flex flex-col justify-center items-center gap-2 w-fit text-sm font-bold'>
+                              Quantity
+                              <div className='flex justify-center items-center border border-black rounded-lg'>
+                                <button className='p-1 font-bold text-xl rounded-lg px-3'>+</button>
+                                <div className='p-1 px-5 font-bold border border-r-black border-l-black h-full pt-2'>{pro.quantity}</div>
+                                <button className='p-1 font-bold text-xl rounded-lg px-3'>-</button>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
                       ))
                     }
                   </div>
