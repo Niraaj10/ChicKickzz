@@ -89,7 +89,34 @@ const Cart = () => {
           </div>
 
           <div className='basis-[30%] relative px-6  p-9'>
-            
+            <div className='text-2xl font-bold'>ORDER SUMMARY</div>
+            {/* totallll : {calGST(tPrice)} */}
+
+            <div className='px-4 mt-5'>
+
+              <div className='flex justify-between '>
+                <div className=''>{totalItems} ITEMS</div>
+                <div>₹ {tPrice}.00</div>
+              </div>
+
+              <div className='flex justify-between '>
+                <div className=''>Delivery</div>
+                <div>Free</div>
+              </div>
+
+              <div className='flex justify-between'>
+                <div className=''>Sales Tax</div>
+                <div>GST:{calGST(tPrice)}</div>
+              </div>
+
+              <div className='flex justify-between '>
+                <div className=''>Total</div>
+                <div></div>
+              </div>
+
+              {/* <button>CHECKOUT</button> */}
+              <button className=''>BUY NOW</button>
+            </div>
 
           </div>
 
