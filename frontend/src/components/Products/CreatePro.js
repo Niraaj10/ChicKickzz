@@ -1,8 +1,3 @@
-
-
-
-
-
 import React, { useRef } from 'react'
 import Footer from '../footerr/Footer'
 import { useState } from 'react';
@@ -10,7 +5,7 @@ import axios from 'axios';
 
 const CreatePro = () => {
     const inputRef = useRef(null);
-    const [imgPreviews, setImgPreviews] = useState([]); // This should store File objects
+    const [imgPreviews, setImgPreviews] = useState([]);
     const [product, setProduct] = useState({
         title: '',
         price: '',
@@ -23,36 +18,39 @@ const CreatePro = () => {
 
     const onChangeInput = (e) => {
         const { name, value } = e.target;
-        setProduct({ ...product, [name]: value });
-    };
+        // console.log(name, value)
+        setProduct({ ...product, [name]: value })
+    }
 
     const handleDrop = (e) => {
         e.preventDefault();
         const files = Array.from(e.dataTransfer.files);
-        setImgPreviews((prevPreviews) => [...prevPreviews, ...files]); // Store File objects directly
+        setImgPreviews((prevPreviews) => [...prevPreviews, ...files]); 
     };
 
     const handleChange = (e) => {
         const files = Array.from(e.target.files);
-        setImgPreviews((prevPreviews) => [...prevPreviews, ...files]); // Store File objects directly
+        setImgPreviews((prevPreviews) => [...prevPreviews, ...files]); 
     };
 
     const handleClick = () => {
         inputRef.current.click();
     };
 
-    const remImg = (indexToRemove) => {
+    const remImg = (ind) => {
         setImgPreviews((prevPreviews) =>
-            prevPreviews.filter((_, index) => index !== indexToRemove)
+            prevPreviews.filter((_, index) => index !== ind)
         );
     };
 
+
     const imgsUrl = async () => {
+        // console.log(imgPreviews)
         try {
             const formData = new FormData();
 
             imgPreviews.forEach((file) => {
-                formData.append('files', file); // Append actual File objects
+                formData.append('files', file); 
             });
 
             const res = await axios.post('/api/upload', formData, {
@@ -61,8 +59,10 @@ const CreatePro = () => {
                 },
             });
 
-            console.log('Uploaded Files:', res.data); // Logs the response from the backend
-            return res.data; // Returns an array of objects with public_id and url
+            // console.log(res)
+            // console.log('Uploaded Files:', res.data); 
+            return res.data; 
+
 
         } catch (error) {
             console.error('Error uploading files:', error);
@@ -70,15 +70,52 @@ const CreatePro = () => {
         }
     };
 
-    const submitFrm = () => {
-        imgsUrl();
+    const submitFrm = async () => {
+        const imgs = await imgsUrl();
+        // console.log(imgs)
+
+        setProduct({...product, images: imgs});
+        // console.log(product)
+        // console.log(product)
+
+        
+
+
+
+
     };
+
 
     return (
         <>
             <div className='CreatePro mt-[150px]'>
                 <div className='IpdateForm  w-full bg-white rounded-2xl p-7'>
+
                     <form action="" className='grid grid-cols-2 gap-4 '>
+
+                        <div className='w-[25vw] flex flex-col gap-3'>
+                            <div className='font-semibold'>PRODUCT NAME / TITLE</div>
+                            <input type="text" name='title' placeholder='Product Name' className='outline rounded-md p-1' onChange={onChangeInput} />
+                        </div>
+
+                        <div className='w-[25vw] flex flex-col gap-3'>
+                            <div className='font-semibold'>DESCRIPTION</div>
+                            <textarea name="description" id="Description" className='outline rounded-md p-1' placeholder='Description' onChange={onChangeInput}>
+
+                            </textarea>
+
+                        </div>
+
+                        <div className='w-[25vw] flex flex-col gap-3'>
+                            <div className='font-semibold'>SIZE</div>
+
+                            <input type="text" placeholder='Size' name='size' className='outline rounded-md p-1' onChange={onChangeInput} />
+
+                            {/* <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
+        <label for="vehicle1"> I have a bike</label> */}
+
+                        </div>
+
                         <div className='w-[25vw] flex flex-col gap-3'>
                             <div className='font-semibold'>CATEGORY</div>
                             <input type="text" placeholder='Category' name='category' className='outline rounded-md p-1' onChange={onChangeInput} />
@@ -94,21 +131,25 @@ const CreatePro = () => {
                             <input type="text" placeholder='Content' name='content' className='outline rounded-md p-1' />
                         </div>
 
+
+
                         <div className='flex flex-col gap-3 grid-cols-subgrid w-[70vw]'>
                             <div className='font-semibold'>Images</div>
+                            <div className='flex gap-6'>
+
                             <div
                                 onClick={handleClick}
                                 onDrop={handleDrop}
                                 onDragOver={(e) => e.preventDefault()}
                                 className="w-[25vw] h-32 border-2 border-dashed border-gray-300 rounded-lg p-4 text-center cursor-pointer focus:outline-none focus:border-blue-500 flex hover:text-[#4A69E] items-center justify-center hover:border-[#4A69E2]"
-                            >
+                                >
                                 <input
                                     ref={inputRef}
                                     type="file"
                                     multiple
                                     onChange={handleChange} // Handle the selected file
                                     className="hidden"
-                                />
+                                    />
                                 <p className="text-gray-500 hover:text-[#4A69E2]">Drag & drop images, or click to select</p>
                             </div>
 
@@ -116,33 +157,40 @@ const CreatePro = () => {
                                 <div className="mt-4 grid grid-cols-4 gap-4">
                                     {imgPreviews.map((file, index) => (
                                         <div
-                                            key={index}
-                                            className="relative w-24 h-24 border border-gray-300 rounded overflow-hidden"
+                                        key={index}
+                                        className="relative w-24 h-24 border border-gray-300 rounded overflow-hidden"
                                         >
                                             <img
                                                 src={URL.createObjectURL(file)}
                                                 alt={`File Preview ${index + 1}`}
                                                 className="w-full h-full object-cover"
-                                            />
+                                                />
                                             <button
                                                 onClick={() => remImg(index)}
                                                 className="absolute top-0 right-0 mt-1 mr-1 border border-black text-black rounded-full p-1 px-2 leading-none"
-                                            >
+                                                >
                                                 &times;
                                             </button>
                                         </div>
                                     ))}
                                 </div>
                             )}
+                            </div>
                         </div>
+
+
+
+
                     </form>
 
                     <div className='mt-7'>
-                        <div className='bg-black flex justify-center items-center gap-1 text-white w-[15vw] p-3 rounded-xl px-8' onClick={() => submitFrm()}>
+
+                        <div className='bg-black flex justify-center items-center gap-1 text-white  w-[15vw] p-3 rounded-xl px-8' onClick={() => submitFrm()}>
                             UPDATE
                         </div>
                     </div>
                 </div>
+
 
                 <Footer />
             </div>
@@ -150,5 +198,7 @@ const CreatePro = () => {
     )
 }
 
-export default CreatePro;
+export default CreatePro
+
+
 

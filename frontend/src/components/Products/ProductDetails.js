@@ -4,8 +4,11 @@ import { GlobalState } from '../../GlobalState';
 import { RiDeleteBin2Line } from 'react-icons/ri'
 import Footer from '../footerr/Footer';
 import axios from 'axios';
+import { useRef } from 'react';
 
 const ProductDetails = () => {
+    const inputRef = useRef(null);
+    const [imgPreviews, setImgPreviews] = useState([]);
     const [proDetails, setProDetails] = useState([]);
     const params = useParams();
 
@@ -21,10 +24,44 @@ const ProductDetails = () => {
             products.forEach(pro => {
                 if (pro._id === params.id) {
                     setProDetails(pro)
+                    // setImgPreviews(proDetails.images)
+                    const imagePreviews = pro?.images || [];
+                    setImgPreviews(imagePreviews);
                 }
             })
         }
     }, [params, products])
+
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        const files = Array.from(e.dataTransfer.files);
+        setImgPreviews((prevPreviews) => [...prevPreviews, ...files]);
+    };
+
+    const handleChange = (e) => {
+        const files = Array.from(e.target.files);
+        setImgPreviews((prevPreviews) => [...prevPreviews, ...files]);
+    };
+
+    const handleClick = () => {
+        inputRef.current.click();
+    };
+
+    const remImg = (ind) => {
+        setImgPreviews((prevPreviews) =>
+            prevPreviews.filter((_, index) => index !== ind)
+        );
+    };
+
+    const remProImg = (ind) => {
+        setProDetails((prevProDetails) => ({
+            ...prevProDetails,
+            images: prevProDetails.images.filter((img, index) => index !== ind)
+        }));
+        console.log(proDetails.images);
+        
+    };
 
     const deletePro = async (proId, proTitle) => {
         if (window.confirm(`You want to delete this product : ${proTitle}`)) {
@@ -39,6 +76,44 @@ const ProductDetails = () => {
 
         }
     }
+
+
+    
+    const imgsUrl = async () => {
+        // console.log(imgPreviews)
+        try {
+            const formData = new FormData();
+
+            imgPreviews.forEach((file) => {
+                formData.append('files', file); 
+            });
+
+            const res = await axios.post('/api/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            // console.log(res)
+            // console.log('Uploaded Files:', res.data); 
+            return res.data; 
+
+
+        } catch (error) {
+            console.error('Error uploading files:', error);
+            return [];
+        }
+    };
+
+
+    const submitFrm = async () => {
+        const imgs = await imgsUrl();
+        // console.log(imgs)  
+
+
+
+
+    };
 
     // console.log(proDetails.images)
 
@@ -59,7 +134,7 @@ const ProductDetails = () => {
                         <div className='flex gap-12 mt-40'>
 
 
-                            <div className='flex bg-white rounded-2xl p-4 flex-col gap-5 justify-between items-center'>
+                            <div className='flex bg-white basis-[30%] rounded-2xl p-4 flex-col gap-5 justify-between items-center'>
 
                                 <div className=' mb-[-40px]'>
                                     {/* {
@@ -68,7 +143,7 @@ const ProductDetails = () => {
 
                                     ))
                                 } */}
-                                    <img src={proDetails.images[0].url} alt="" className='w-[15vw] h-[30vh] rounded-2xl object-cover' loading='lazy' />
+                                    <img src={proDetails?.images[0].url} alt="" className='w-[15vw] h-[30vh] rounded-2xl object-cover' loading='lazy' />
                                 </div>
 
                                 <div className=''>
@@ -121,7 +196,7 @@ const ProductDetails = () => {
                                 </div>
                             </div>
 
-                            <div className='IpdateForm  w-full bg-white rounded-2xl border border-black p-7'>
+                            <div className='IpdateForm basis-[70%] bg-white rounded-2xl border border-black p-7'>
 
                                 <form action="" className='grid grid-cols-2 gap-4 '>
 
@@ -164,16 +239,85 @@ const ProductDetails = () => {
                                     </div>
 
 
-                                    <div className='border border-black flex gap-3 grid-cols-subgrid w-[60vw]'>
-                                        <img src={proDetails.images[0].url} alt="" className='w-[15vw] h-[30vh] rounded-2xl object-cover' />
+                                    <div className='flex flex-col gap-3 grid-cols-subgrid w-[60vw]'>
+                                        {/* <img src={proDetails.images[0].url} alt="" className='w-[15vw] h-[30vh] rounded-2xl object-cover' /> */}
 
-                                        <div>
-
+                                        <div className='font-semibold '>
+                                            IMAGES
                                         </div>
 
                                         <div>
-                                        <input type="file"/>
+                                        {proDetails.images.length > 0 && (
+                                                    <div className="mt-4 grid grid-cols-4 gap-4">
+                                                        {proDetails.images.map((img, index) => (
+                                                            <div
+                                                                key={index}
+                                                                className="relative w-24 h-24 border border-gray-300 rounded overflow-hidden"
+                                                            >
+                                                                <img
+                                                                    src={img.url}
+                                                                    alt={`File Preview ${index + 1}`}
+                                                                    className="w-full h-full object-cover"
+                                                                />
+                                                                <button
+                                                                    onClick={() => remProImg(index)}
+                                                                    className="absolute top-0 right-0 mt-1 mr-1 border border-black text-black rounded-full p-1 px-2 leading-none"
+                                                                >
+                                                                    &times;
+                                                                </button>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
                                         </div>
+
+                                        <div>
+
+                                            {/* <input type="file"/> */}
+                                            <div className='flex gap-6'>
+
+                                                <div
+                                                    onClick={handleClick}
+                                                    onDrop={handleDrop}
+                                                    onDragOver={(e) => e.preventDefault()}
+                                                    className="w-[25vw] h-32 border-2 border-dashed border-gray-300 rounded-lg p-4 text-center cursor-pointer focus:outline-none focus:border-blue-500 flex hover:text-[#4A69E] items-center justify-center hover:border-[#4A69E2]"
+                                                >
+                                                    <input
+                                                        ref={inputRef}
+                                                        type="file"
+                                                        multiple
+                                                        onChange={handleChange} // Handle the selected file
+                                                        className="hidden"
+                                                    />
+                                                    <p className="text-gray-500 hover:text-[#4A69E2]">Drag & drop images, or click to select</p>
+                                                </div>
+
+                                                {proDetails.images.length > 0 && (
+                                                    <div className="mt-4 grid grid-cols-4 gap-4">
+                                                        {proDetails.images.map((img, index) => (
+                                                            <div
+                                                                key={index}
+                                                                className="relative w-24 h-24 border border-gray-300 rounded overflow-hidden"
+                                                            >
+                                                                <img
+                                                                    src={img.url}
+                                                                    alt={`File Preview ${index + 1}`}
+                                                                    className="w-full h-full object-cover"
+                                                                />
+                                                                <button
+                                                                    onClick={() => remImg(index)}
+                                                                    className="absolute top-0 right-0 mt-1 mr-1 border border-black text-black rounded-full p-1 px-2 leading-none"
+                                                                >
+                                                                    &times;
+                                                                </button>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                        </div>
+
                                     </div>
 
 
@@ -183,7 +327,7 @@ const ProductDetails = () => {
 
                                 <div>
 
-                                    <div className='bg-black flex justify-center items-center gap-1 text-white  w-[15vw] p-3 rounded-xl px-8'>
+                                    <div className='bg-black flex justify-center items-center gap-1 text-white  w-[15vw] p-3 rounded-xl px-8 mt-7'>
                                         UPDATE
                                     </div>
                                 </div>
