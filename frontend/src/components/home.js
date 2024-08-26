@@ -3,6 +3,8 @@ import Navbar from './Navbar'
 import nikeShoe from '../assests/img/nikeShoeHome.jpg'
 import { Link } from 'react-router-dom'
 import Footer from './footerr/Footer'
+import Products from './Products/products'
+import fire from '../assests/img/fire.png'
 
 const home = () => {
     return (
@@ -30,6 +32,13 @@ const home = () => {
 
 
                     <img src={nikeShoe} alt="" className='border h-[65vh]  md:h-[70vh] w-[90vw] lg:h-[70vh] object-cover mx-auto rounded-[2rem] md:rounded-[3rem] lg:rounded-[3rem]' />
+                </div>
+
+                <div>
+                    <div className='text-[6vw] md:text-[4vw] lg:text-[4vw] font-bold mt-11 flex justify-center items-center mb-[-100px]'>
+                        DON'T MISS OUT NEW DROPS <img src={fire} alt="" className='w-[10vw] ml-[-25px] rotate-12' />
+                    </div>
+                    <Products />
                 </div>
 
 

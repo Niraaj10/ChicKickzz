@@ -3,6 +3,7 @@ import { GlobalState } from '../../GlobalState'
 import { Link } from 'react-router-dom'
 import fire from '../img/fire.png'
 import Footer from '../footerr/Footer'
+import { RiDeleteBinLine } from 'react-icons/ri'
 
 const Cart = () => {
   const state = useContext(GlobalState)
@@ -100,7 +101,16 @@ const Cart = () => {
 
                           <div className='basis-[45%] flex flex-col justify-between my-6'>
                             <div className='text-xl font-bold'>{pro.title.toUpperCase()}</div>
-                            <div>{pro.description}</div>
+                            <div>
+                              {pro.description}
+
+                              <div className='mt-2 p-2 bg-[#f6f6f6] w-fit rounded-lg' onClick={() => removePr(pro._id)}>
+                              <RiDeleteBinLine size={22}  color='gray' className=''/>
+                              </div>
+                            </div>
+                              
+                            {/* <div>
+                            </div> */}
                           </div>
 
                           <div className='basis-[25%] flex flex-col justify-evenly my-6 items-center'>
@@ -146,7 +156,7 @@ const Cart = () => {
 
               <div className='flex justify-between'>
                 <div className=''>Sales Tax</div>
-                <div>GST:{calGST(tPrice)}</div>
+                <div>GST:{calGST(tPrice).toFixed(2)}</div>
               </div>
 
               <div className='flex justify-between mt-5 border-t-gray-300 border-2 pt-3 text-lg font-bold '>
