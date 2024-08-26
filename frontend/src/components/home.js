@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import Footer from './footerr/Footer'
 import Products from './Products/products'
 import fire from '../assests/img/fire.png'
+import ProCret from './Products/ProCret'
 
 const Home = () => {
     const state = useContext(GlobalState)
@@ -64,7 +65,9 @@ const Home = () => {
                 }
 
 
-
+<div>
+    <ProCret />
+</div>
 
                 <div>
                     <Footer />

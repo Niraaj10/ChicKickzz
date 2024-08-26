@@ -1,10 +1,22 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const cookiePar = require('cookie-parser');
 require('dotenv').config();
 const fileUpload = require('express-fileupload');
 
 const app = express();
+
+// app.use(cors({
+//     origin: 'http://localhost:3000', // frontend URL
+//     methods: 'GET,POST,PUT,DELETE',
+//     credentials: true
+// }));
+
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
 
 app.use(express.json());
 app.use(cookiePar());
