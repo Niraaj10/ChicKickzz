@@ -133,34 +133,60 @@ const ProductDetails = () => {
                                     <div className='w-[25vw] flex flex-col gap-3'>
                                         <div className='font-semibold'>DESCRIPTION</div>
                                         <textarea name="ProDescription" id="" className='outline rounded-md p-1' placeholder={proDetails.description}>
-                                            
+
                                         </textarea>
-                                        
+
                                     </div>
 
                                     <div className='w-[25vw] flex flex-col gap-3'>
                                         <div className='font-semibold'>SIZE</div>
+
                                         <input type="text" placeholder={proDetails.size} className='outline rounded-md p-1' />
+
+                                        {/* <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
+                                        <label for="vehicle1"> I have a bike</label> */}
+
                                     </div>
 
                                     <div className='w-[25vw] flex flex-col gap-3'>
-                                        <div className='font-semibold'>PRODUCT NAME</div>
-                                        <input type="text" placeholder={proDetails.title} className='outline rounded-md p-1' />
+                                        <div className='font-semibold'>CATEGORY</div>
+                                        <input type="text" placeholder={proDetails.category} className='outline rounded-md p-1' />
                                     </div>
 
                                     <div className='w-[25vw] flex flex-col gap-3'>
-                                        <div className='font-semibold'>PRODUCT NAME</div>
-                                        <input type="text" placeholder={proDetails.title} className='outline rounded-md p-1' />
+                                        <div className='font-semibold'>PRICE</div>
+                                        <input type="text" placeholder={proDetails.price} className='outline rounded-md p-1' />
                                     </div>
 
                                     <div className='w-[25vw] flex flex-col gap-3'>
-                                        <div className='font-semibold'>PRODUCT NAME</div>
-                                        <input type="text" placeholder={proDetails.title} className='outline rounded-md p-1' />
+                                        <div className='font-semibold'>CONTENT</div>
+                                        <input type="text" placeholder={proDetails.content} className='outline rounded-md p-1' />
                                     </div>
 
-                                                                     
+
+                                    <div className='border border-black flex gap-3 grid-cols-subgrid w-[60vw]'>
+                                        <img src={proDetails.images[0].url} alt="" className='w-[15vw] h-[30vh] rounded-2xl object-cover' />
+
+                                        <div>
+
+                                        </div>
+
+                                        <div>
+                                        <input type="file"/>
+                                        </div>
+                                    </div>
+
+
+
 
                                 </form>
+
+                                <div>
+
+                                    <div className='bg-black flex justify-center items-center gap-1 text-white  w-[15vw] p-3 rounded-xl px-8'>
+                                        UPDATE
+                                    </div>
+                                </div>
                             </div>
 
 
