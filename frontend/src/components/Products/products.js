@@ -7,7 +7,7 @@ const Products = () => {
   const [productss] = state.productAPI.products
   const [isAdmin] = state.userAPI.isAdmin
 
-  // console.log(state)
+  // console.log(state) 
   return (
     <>
       <div className='ProductList mt-[140px]'>
