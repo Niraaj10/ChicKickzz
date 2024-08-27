@@ -107,7 +107,7 @@ const ProductDetails = () => {
             imgPreviews.forEach((item) => {
                 if (item instanceof File) {
                     formData.append('files', item);
-                    hasFiles = true; // Set the flag to true if a file is found
+                    hasFiles = true; 
                 }
             });
 
@@ -124,7 +124,7 @@ const ProductDetails = () => {
                 
                 // console.log(res)
             } else {
-                alert('No files to upload.'); // Show alert if no files are present
+                alert('No files to upload.'); 
                 return [];
             }
 
@@ -292,7 +292,7 @@ const ProductDetails = () => {
                                                         ref={inputRef}
                                                         type="file"
                                                         multiple
-                                                        onChange={handleChange} // Handle the selected file
+                                                        onChange={handleChange} 
                                                         className="hidden"
                                                     />
                                                     <p className="text-gray-500 hover:text-[#4A69E2]">Drag & drop images, or click to select</p>
