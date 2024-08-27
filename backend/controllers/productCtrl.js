@@ -1,6 +1,11 @@
 // const { query } = require('express');
 const Products = require('../models/productModel')
 
+const { v4: uuidv4 } = require('uuid');
+
+function generateUniqueId() {
+    return uuidv4(); // Generates a UUID v4
+}
 
 class APIfeatures{
     constructor(query,queryString){
@@ -73,12 +78,13 @@ const productCtrl = {
 
             if(!images) return res.status(400).json({'msg':"Please upload images"})
 
-            const product = await Products.findOne({product_id})
+            // const product = await Products.findOne({product_id})
+            const product = await Products.findOne({title})
 
             if(product) return res.status(400).json({'msg':"This product is already exists"})
 
             const newProduct = new Products({
-                product_id,
+                product_id: generateUniqueId(),
                 title: title.toUpperCase(),
                 price,
                 description,

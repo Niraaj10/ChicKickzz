@@ -294,7 +294,8 @@ const ProductDetails = () => {
                                     <div className='w-[25vw] flex flex-col gap-3'>
                                         <div className='font-semibold'>SIZE</div>
 
-                                        <input type="text" placeholder={proDetails.size} name='size' onChange={onChangeInput} className='outline rounded-md p-1' />
+                                        {/* <input type="text" placeholder={proDetails.size} name='size' onChange={onChangeInput} className='outline rounded-md p-1' /> */}
+                                        <input type="text" placeholder={proDetails.size} onChange={onChangeInput} className='outline rounded-md p-1' />
 
                                         {/* <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
                                         <label for="vehicle1"> I have a bike</label> */}
@@ -450,7 +451,7 @@ const ProductDetails = () => {
                                         </Link>
                                     </div>
 
-                                    <button onClick={() => addToCart(proDetails)}>Add to cart</button>
+                                    {/* <button onClick={() => addToCart(proDetails)}>Add to cart</button> */}
                                 </div>
                             </div>
                         </div>

@@ -2,10 +2,12 @@ import React, { useRef } from 'react'
 import Footer from '../footerr/Footer'
 import { useState } from 'react';
 import axios from 'axios';
+import { CircularProgress } from '@mui/material';
 
 const CreatePro = () => {
     const inputRef = useRef(null);
     const [imgPreviews, setImgPreviews] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [product, setProduct] = useState({
         title: '',
         price: '',
@@ -25,12 +27,12 @@ const CreatePro = () => {
     const handleDrop = (e) => {
         e.preventDefault();
         const files = Array.from(e.dataTransfer.files);
-        setImgPreviews((prevPreviews) => [...prevPreviews, ...files]); 
+        setImgPreviews((prevPreviews) => [...prevPreviews, ...files]);
     };
 
     const handleChange = (e) => {
         const files = Array.from(e.target.files);
-        setImgPreviews((prevPreviews) => [...prevPreviews, ...files]); 
+        setImgPreviews((prevPreviews) => [...prevPreviews, ...files]);
     };
 
     const handleClick = () => {
@@ -50,7 +52,7 @@ const CreatePro = () => {
             const formData = new FormData();
 
             imgPreviews.forEach((file) => {
-                formData.append('files', file); 
+                formData.append('files', file);
             });
 
             const res = await axios.post('/api/upload', formData, {
@@ -61,40 +63,53 @@ const CreatePro = () => {
 
             // console.log(res)
             // console.log('Uploaded Files:', res.data); 
-            return res.data; 
+            return res.data;
 
 
         } catch (error) {
             console.error('Error uploading files:', error);
+            alert(error.response.data.msg);
             return [];
         }
     };
 
     const submitFrm = async () => {
         // e.preventDefault();
+        setLoading(true);
         const imgs = await imgsUrl();
         // console.log(imgs)
 
-        setProduct({...product, images: imgs});
+        setProduct({ ...product, images: imgs });
         // console.log(product)
         console.log(product)
 
 
         try {
-          await axios.post('/api/products', { ...product })
-  
-    
+            await axios.post('/api/products', { ...product })
+            setLoading(false);
+
         } catch (error) {
-          alert(error.response.data.msg)
-          console.log(error)
-        }     
+            setLoading(false);
+            alert(error.response.data.msg)
+            console.log(error)
+        }
 
     };
 
 
     return (
         <>
-            <div className='CreatePro mt-[150px]'>
+            <div className='CreatePro mt-[150px] relative'>
+                {loading && (
+
+                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                        <div className='bg-[#4A69E2] p-4 px-24 rounded-2xl'>
+                        <CircularProgress  sx={{color: 'white'}} />
+                        </div>
+
+                    </div>
+
+                )}
                 <div className='IpdateForm  w-full bg-white rounded-2xl p-7'>
 
                     <form action="" className='grid grid-cols-2 gap-4 '>
@@ -143,44 +158,44 @@ const CreatePro = () => {
                             <div className='font-semibold'>Images</div>
                             <div className='flex gap-6'>
 
-                            <div
-                                onClick={handleClick}
-                                onDrop={handleDrop}
-                                onDragOver={(e) => e.preventDefault()}
-                                className="w-[25vw] h-32 border-2 border-dashed border-gray-300 rounded-lg p-4 text-center cursor-pointer focus:outline-none focus:border-blue-500 flex hover:text-[#4A69E] items-center justify-center hover:border-[#4A69E2]"
+                                <div
+                                    onClick={handleClick}
+                                    onDrop={handleDrop}
+                                    onDragOver={(e) => e.preventDefault()}
+                                    className="w-[25vw] h-32 border-2 border-dashed border-gray-300 rounded-lg p-4 text-center cursor-pointer focus:outline-none focus:border-blue-500 flex hover:text-[#4A69E] items-center justify-center hover:border-[#4A69E2]"
                                 >
-                                <input
-                                    ref={inputRef}
-                                    type="file"
-                                    multiple
-                                    onChange={handleChange} // Handle the selected file
-                                    className="hidden"
+                                    <input
+                                        ref={inputRef}
+                                        type="file"
+                                        multiple
+                                        onChange={handleChange} // Handle the selected file
+                                        className="hidden"
                                     />
-                                <p className="text-gray-500 hover:text-[#4A69E2]">Drag & drop images, or click to select</p>
-                            </div>
-
-                            {imgPreviews.length > 0 && (
-                                <div className="mt-4 grid grid-cols-4 gap-4">
-                                    {imgPreviews.map((file, index) => (
-                                        <div
-                                        key={index}
-                                        className="relative w-24 h-24 border border-gray-300 rounded overflow-hidden"
-                                        >
-                                            <img
-                                                src={URL.createObjectURL(file)}
-                                                alt={`File Preview ${index + 1}`}
-                                                className="w-full h-full object-cover"
-                                                />
-                                            <button
-                                                onClick={() => remImg(index)}
-                                                className="absolute top-0 right-0 mt-1 mr-1 border border-black text-black rounded-full p-1 px-2 leading-none"
-                                                >
-                                                &times;
-                                            </button>
-                                        </div>
-                                    ))}
+                                    <p className="text-gray-500 hover:text-[#4A69E2]">Drag & drop images, or click to select</p>
                                 </div>
-                            )}
+
+                                {imgPreviews.length > 0 && (
+                                    <div className="mt-4 grid grid-cols-4 gap-4">
+                                        {imgPreviews.map((file, index) => (
+                                            <div
+                                                key={index}
+                                                className="relative w-24 h-24 border border-gray-300 rounded overflow-hidden"
+                                            >
+                                                <img
+                                                    src={URL.createObjectURL(file)}
+                                                    alt={`File Preview ${index + 1}`}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                                <button
+                                                    onClick={() => remImg(index)}
+                                                    className="absolute top-0 right-0 mt-1 mr-1 border border-black text-black rounded-full p-1 px-2 leading-none"
+                                                >
+                                                    &times;
+                                                </button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                         </div>
 

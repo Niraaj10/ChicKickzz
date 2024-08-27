@@ -17,7 +17,7 @@ function App() {
       <DataProvider>
 
         <Router>
-          <div className="App mx-5 lg:mx-14">
+          <div className="App mx-5  lg:mx-14">
 
             <Navbar />
 
