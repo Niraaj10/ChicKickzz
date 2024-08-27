@@ -11,6 +11,7 @@ const ProductDetails = () => {
     const [imgPreviews, setImgPreviews] = useState([]);
     const [proDetails, setProDetails] = useState([]);
     const params = useParams();
+    const [loading, setLoading] = useState(false);
 
     const state = useContext(GlobalState)
     const [products] = state.productAPI.products;
@@ -19,18 +20,29 @@ const ProductDetails = () => {
     const addToCart = state.userAPI.addToCart;
 
 
+    const updateImgPreviews = (pro) => {
+        const imagePrev = pro?.images || [];
+        setImgPreviews(imagePrev);
+        console.log(imgPreviews)
+    };
+
     useEffect(() => {
         if (params) {
             products.forEach(pro => {
                 if (pro._id === params.id) {
                     setProDetails(pro)
                     // setImgPreviews(proDetails.images)
-                    const imagePreviews = pro?.images || [];
-                    setImgPreviews(imagePreviews);
+                    // const imagePreviews = pro?.images || [];
+                    // setImgPreviews(imagePreviews);
+                    updateImgPreviews(pro)
                 }
             })
         }
     }, [params, products])
+
+    // const imagePrev = proDetails?.images || [];
+    // setImgPreviews(imagePrev);
+    // console.log(imgPreviews)
 
 
     const handleDrop = (e) => {
@@ -48,10 +60,16 @@ const ProductDetails = () => {
         inputRef.current.click();
     };
 
+
     const remImg = (ind) => {
-        setImgPreviews((prevPreviews) =>
-            prevPreviews.filter((_, index) => index !== ind)
-        );
+        // setImgPreviews((prevPreviews) =>
+        //     prevPreviews.filter((_, index) => index !== ind)
+        // );
+        if (imgPreviews && imgPreviews.length > 0) {
+            setImgPreviews((prevPreviews) =>
+                prevPreviews.filter((_, index) => index !== ind)
+            );
+        }
     };
 
     const remProImg = (ind) => {
@@ -60,7 +78,7 @@ const ProductDetails = () => {
             images: prevProDetails.images.filter((img, index) => index !== ind)
         }));
         console.log(proDetails.images);
-        
+
     };
 
     const deletePro = async (proId, proTitle) => {
@@ -78,31 +96,43 @@ const ProductDetails = () => {
     }
 
 
-    
+
     const imgsUrl = async () => {
         // console.log(imgPreviews)
+        setLoading(true); 
         try {
             const formData = new FormData();
+            let hasFiles = false;
 
-            imgPreviews.forEach((file) => {
-                formData.append('files', file); 
+            imgPreviews.forEach((item) => {
+                if (item instanceof File) {
+                    formData.append('files', item);
+                    hasFiles = true; // Set the flag to true if a file is found
+                }
             });
 
-            const res = await axios.post('/api/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-
-            // console.log(res)
-            // console.log('Uploaded Files:', res.data); 
-            return res.data; 
+            if (hasFiles) {
+                const res = await axios.post('/api/upload', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+    
+                console.log('Uploaded Files:', res.data);                 
+                setLoading(false)             
+                return res.data;
+                
+                // console.log(res)
+            } else {
+                alert('No files to upload.'); // Show alert if no files are present
+                return [];
+            }
 
 
         } catch (error) {
             console.error('Error uploading files:', error);
             return [];
-        }
+        } 
     };
 
 
@@ -122,9 +152,14 @@ const ProductDetails = () => {
     // console.log(proDetails)
     return (
         <>
-            <div className='ProductDetails mt-[140px]'>
+            <div className='ProductDetails mt-[140px] relative'>
                 {/* Product detaillllll */}
 
+                {loading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+                    <div className="w-16 h-16 border-4 border-t-4 border-blue-500 border-solid rounded-full animate-spin"></div>
+                </div>
+            )}
 
                 {
                     isAdmin ? <>
@@ -137,12 +172,7 @@ const ProductDetails = () => {
                             <div className='flex bg-white basis-[30%] rounded-2xl p-4 flex-col gap-5 justify-between items-center'>
 
                                 <div className=' mb-[-40px]'>
-                                    {/* {
-                                    proDetails.images.map(img => (
-                                        <img src={img.url} alt="" className='object-cover lg:w-[250vw] lg:h-[55vh] ' />
 
-                                    ))
-                                } */}
                                     <img src={proDetails?.images[0].url} alt="" className='w-[15vw] h-[30vh] rounded-2xl object-cover' loading='lazy' />
                                 </div>
 
@@ -246,35 +276,11 @@ const ProductDetails = () => {
                                             IMAGES
                                         </div>
 
-                                        <div>
-                                        {proDetails.images.length > 0 && (
-                                                    <div className="mt-4 grid grid-cols-4 gap-4">
-                                                        {proDetails.images.map((img, index) => (
-                                                            <div
-                                                                key={index}
-                                                                className="relative w-24 h-24 border border-gray-300 rounded overflow-hidden"
-                                                            >
-                                                                <img
-                                                                    src={img.url}
-                                                                    alt={`File Preview ${index + 1}`}
-                                                                    className="w-full h-full object-cover"
-                                                                />
-                                                                <button
-                                                                    onClick={() => remProImg(index)}
-                                                                    className="absolute top-0 right-0 mt-1 mr-1 border border-black text-black rounded-full p-1 px-2 leading-none"
-                                                                >
-                                                                    &times;
-                                                                </button>
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                )}
-                                        </div>
 
                                         <div>
 
                                             {/* <input type="file"/> */}
-                                            <div className='flex gap-6'>
+                                            <div className='flex items-center gap-6'>
 
                                                 <div
                                                     onClick={handleClick}
@@ -292,28 +298,38 @@ const ProductDetails = () => {
                                                     <p className="text-gray-500 hover:text-[#4A69E2]">Drag & drop images, or click to select</p>
                                                 </div>
 
-                                                {proDetails.images.length > 0 && (
+                                                {imgPreviews.length > 0 && (
                                                     <div className="mt-4 grid grid-cols-4 gap-4">
-                                                        {proDetails.images.map((img, index) => (
+                                                        {imgPreviews.map((img, index) => (
                                                             <div
                                                                 key={index}
                                                                 className="relative w-24 h-24 border border-gray-300 rounded overflow-hidden"
                                                             >
+                                                                {console.log(img)}
+                                                                {console.log('img URL :', img.url)}
                                                                 <img
-                                                                    src={img.url}
+                                                                    src={img instanceof File ? URL.createObjectURL(img) : img.url}
                                                                     alt={`File Preview ${index + 1}`}
                                                                     className="w-full h-full object-cover"
                                                                 />
-                                                                <button
+                                                                <div
                                                                     onClick={() => remImg(index)}
                                                                     className="absolute top-0 right-0 mt-1 mr-1 border border-black text-black rounded-full p-1 px-2 leading-none"
                                                                 >
                                                                     &times;
-                                                                </button>
+                                                                </div>
                                                             </div>
                                                         ))}
                                                     </div>
                                                 )}
+
+
+                                                <div>
+                                                    <div className='bg-black flex justify-center items-center gap-1 text-white  w-[6vw] p-3 rounded-xl px-3' onClick={imgsUrl}>
+                                                        UPDATE
+                                                    </div>
+                                                </div>
+
                                             </div>
 
                                         </div>

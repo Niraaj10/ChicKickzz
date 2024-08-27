@@ -76,7 +76,7 @@ const CreatePro = () => {
 
         setProduct({...product, images: imgs});
         // console.log(product)
-        // console.log(product)
+        console.log(product)
 
         
 
@@ -185,7 +185,7 @@ const CreatePro = () => {
 
                     <div className='mt-7'>
 
-                        <div className='bg-black flex justify-center items-center gap-1 text-white  w-[15vw] p-3 rounded-xl px-8' onClick={() => submitFrm()}>
+                        <div className='bg-black flex justify-center items-center gap-1 text-white  w-[15vw] p-3 rounded-xl px-8 cursor-pointer' onClick={() => submitFrm()}>
                             UPDATE
                         </div>
                     </div>

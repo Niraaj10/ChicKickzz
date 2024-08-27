@@ -56,7 +56,7 @@ const ProductCard = ({ product, isAdmin }) => {
 
 
             <div className='flex justify-center items-center gap-2'>
-              <Link to={`detail/${product._id}`} className='bg-black text-white p-2 rounded-xl flex justify-center items-center gap-2 px-8'>
+              <Link to={`/products/${product._id}`} className='bg-black text-white p-2 rounded-xl flex justify-center items-center gap-2 px-8'>
                 EDIT <FaRegEdit className='mt-[-2px]' size={20}/>
               </Link>
               <div onClick={() => deletePro(product._id, product.title.toUpperCase())} className='bg-black flex justify-center items-center gap-1 text-white p-2 rounded-xl px-8'>
@@ -89,7 +89,7 @@ const ProductCard = ({ product, isAdmin }) => {
 
 
           <div className='bg-black text-white p-2 flex justify-center items-center rounded-xl'>
-            <Link to={`detail/${product._id}`}>
+            <Link to={`/products/${product._id}`}>
               VIEW PRODUCT - ₹ {product.price}.00
             </Link>
           </div>
