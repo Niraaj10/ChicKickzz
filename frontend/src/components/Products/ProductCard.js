@@ -33,13 +33,13 @@ const ProductCard = ({ product, isAdmin }) => {
           
           <div className='flex flex-col gap-2'>
 
-            <div className='flex'>
+            <div className='flex lg:flex-row md:flex-row flex-col'>
               <div className='relative overflow-hidden rounded-2xl'>
                 {/* <div className='absolute bg-[#FFA52F] z-10 top-[-32px] left-[-25px] p-1 pr-2 rounded-2xl pl-8 pt-9 font-semibold text-[13px] ' >
               New
               </div> */}
 
-                <img src={product.images[0].url} alt="" className='w-[6vw] h-[12vh] rounded-2xl object-cover' loading='lazy' />
+                <img src={product.images[0].url} alt="" className='lg:w-[6vw] lg:h-[12vh] rounded-2xl object-cover' loading='lazy' />
 
               </div>
 
@@ -55,11 +55,11 @@ const ProductCard = ({ product, isAdmin }) => {
             </div>
 
 
-            <div className='flex justify-center items-center gap-2'>
-              <Link to={`/products/${product._id}`} className='bg-black text-white p-2 rounded-xl flex justify-center items-center gap-2 px-8'>
+            <div className='flex lg:flex-row flex-col lg:justify-center items-center gap-2'>
+              <Link to={`/products/${product._id}`} className='bg-black text-white p-2 rounded-xl flex justify-center items-center gap-2 px-3 md:px-8 lg:px-8'>
                 EDIT <FaRegEdit className='mt-[-2px]' size={20}/>
               </Link>
-              <div onClick={() => deletePro(product._id, product.title.toUpperCase())} className='bg-black flex justify-center items-center gap-1 text-white p-2 rounded-xl px-8'>
+              <div onClick={() => deletePro(product._id, product.title.toUpperCase())} className='hidden bg-black lg:flex justify-center items-center gap-1 text-white  p-2 rounded-xl px-3 md:px-8 lg:px-8'>
                 DELETE <RiDeleteBin2Line  className='mt-[-2px]' size={20}/>
               </div>
             </div>
@@ -76,7 +76,7 @@ const ProductCard = ({ product, isAdmin }) => {
               New
             </div>
 
-            <img src={product.images[0].url} alt="" className='w-[19vw] h-[42vh] rounded-2xl object-cover' loading='lazy' />
+            <img src={product.images[0].url} alt="" className='lg:w-[19vw] lg:h-[42vh] rounded-2xl object-cover' loading='lazy' />
 
           </div>
 
@@ -88,9 +88,9 @@ const ProductCard = ({ product, isAdmin }) => {
           </div>
 
 
-          <div className='bg-black text-white p-2 flex justify-center items-center rounded-xl'>
-            <Link to={`/products/${product._id}`}>
-              VIEW PRODUCT - ₹ {product.price}.00
+          <div className='bg-black lg:text-base text-sm text-white p-2 flex  justify-center items-center  rounded-xl'>
+            <Link to={`/products/${product._id}`} className='flex lg:flex-row flex-col'>
+              VIEW PRODUCT - <div>₹ {product.price}.00</div>
             </Link>
           </div>
 

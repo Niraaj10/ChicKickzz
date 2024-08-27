@@ -19,7 +19,7 @@ const Products = () => {
           {/* Productsss */}
         </div>
 
-        <div className=' flex gap-9 flex-wrap  justify-center '>
+        <div className=' grid grid-cols-2 gap-4 lg:flex lg:gap-9 lg:flex-wrap  lg:justify-center '>
 
           {
             isAdmin && <>
@@ -44,7 +44,7 @@ const Products = () => {
 
 
         <div>
-          <Footer />
+          {/* <Footer /> */}
         </div>
 
       </div>

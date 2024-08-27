@@ -8,6 +8,8 @@ import { FaSearch } from 'react-icons/fa'
 import { GlobalState } from '../GlobalState'
 import axios from 'axios'
 import { HiOutlineLogout } from 'react-icons/hi'
+import { IoMdAddCircle } from 'react-icons/io'
+import { AiOutlineAppstore, AiOutlineAppstoreAdd } from 'react-icons/ai'
 // import { Link } from 'react-router-dom'
 
 
@@ -59,7 +61,17 @@ const Navbar = () => {
             <nav className='Navbar fixed top-0 z-50 w-[92vw] flex justify-between items-center my-6 p-6 py-4 bg-white rounded-3xl shadow-custom mb-4' >
 
                 <div>
-                    <TiThMenu size={25} className='lg:hidden md:hidden' />
+                    {/* <TiThMenu size={25} className='lg:hidden md:hidden' /> */}
+                    <Link to='/products'>
+                    {
+                        isAdmin ? <>
+                        {/* <IoMdAddCircle size={25} className='lg:hidden md:hidden' /> */}
+                        <AiOutlineAppstoreAdd size={25} className='lg:hidden md:hidden' />
+                        </> : <>
+                        <AiOutlineAppstore size={25} className='lg:hidden md:hidden' />
+                        </>
+                    }
+                    </Link>
 
                     {/* {isAdmin && adminRoutes} */}
 
@@ -78,7 +90,8 @@ const Navbar = () => {
                 </Link>
 
                 <div className='flex justify-between gap-2 md:gap-7 lg:gap-7 items-center'>
-                    <Link to='/search' className='hidden lg:block md:block'>
+                    {/* <Link to='/search' className='hidden lg:block md:block'> */}
+                    <Link to='/products'className='hidden lg:block md:block'>
                         <div className='flex justify-center items-center'>
                             <FaSearch size={18} />
                         </div>

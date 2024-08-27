@@ -65,12 +65,12 @@ const Home = () => {
                 }
 
 
-<div>
+{/* <div>
     <ProCret />
-</div>
+</div> */}
 
                 <div>
-                    <Footer />
+                    {/* <Footer /> */}
                 </div>
 
             </div>

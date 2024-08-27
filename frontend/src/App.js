@@ -9,6 +9,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { DataProvider } from './GlobalState';
 import ProductDetails from './components/Products/ProductDetails';
 import CreatePro from './components/Products/CreatePro';
+import Footer from './components/footerr/Footer';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
             </Routes>
 
             {/* helloooo   */}
+            <Footer />
           </div>
         </Router>
 

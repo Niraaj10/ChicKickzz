@@ -79,13 +79,19 @@ const CreatePro = () => {
         const imgs = await imgsUrl();
         // console.log(imgs)
 
-        setProduct({ ...product, images: imgs });
-        // console.log(product)
-        console.log(product)
+
+        let updatedDetails = { ...product };
+        if (imgs.length > 0) {
+            updatedDetails = {
+                ...updatedDetails,
+                images: [...(updatedDetails.images || []), ...imgs]
+            };
+        }
 
 
         try {
-            await axios.post('/api/products', { ...product })
+            // await axios.post('/api/products', { ...product })
+            await axios.post('/api/products', updatedDetails )
             setLoading(false);
 
         } catch (error) {
@@ -213,7 +219,7 @@ const CreatePro = () => {
                 </div>
 
 
-                <Footer />
+                {/* <Footer /> */}
             </div>
         </>
     )

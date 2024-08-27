@@ -211,14 +211,14 @@ const ProductDetails = () => {
 
                         {/* <div>admin</div> */}
 
-                        <div className='flex gap-12 mt-40'>
+                        <div className='flex flex-col lg:flex-row gap-12 mt-40'>
 
 
                             <div className='flex bg-white basis-[30%] rounded-2xl p-4 flex-col gap-5 justify-between items-center'>
 
                                 <div className=' mb-[-40px]'>
 
-                                    <img src={proDetails?.images[0].url} alt="" className='w-[15vw] h-[30vh] rounded-2xl object-cover' loading='lazy' />
+                                    <img src={proDetails?.images[0]?.url} alt="" className='lg:w-[15vw] lg:h-[30vh] md:w-[15vw] md:h-[30vh] rounded-2xl object-cover' loading='lazy' />
                                 </div>
 
                                 <div className=''>
@@ -276,14 +276,14 @@ const ProductDetails = () => {
 
                             <div className='IpdateForm basis-[70%] bg-white rounded-2xl p-7'>
 
-                                <form action="" className='grid grid-cols-2 gap-4 '>
+                                <form action="" className='grid lg:grid-cols-2 gap-4 '>
 
-                                    <div className='w-[25vw] flex flex-col gap-3'>
+                                    <div className='lg:w-[25vw] flex flex-col gap-3'>
                                         <div className='font-semibold'>PRODUCT NAME / TITLE</div>
                                         <input type="text" placeholder={proDetails.title} name='title' onChange={onChangeInput} className='outline rounded-md p-1' />
                                     </div>
 
-                                    <div className='w-[25vw] flex flex-col gap-3'>
+                                    <div className='lg:w-[25vw] flex flex-col gap-3'>
                                         <div className='font-semibold'>DESCRIPTION</div>
                                         <textarea name="description" id="Description"  onChange={onChangeInput} className='outline rounded-md p-1' placeholder={proDetails.description}>
 
@@ -291,7 +291,7 @@ const ProductDetails = () => {
 
                                     </div>
 
-                                    <div className='w-[25vw] flex flex-col gap-3'>
+                                    <div className='lg:w-[25vw] flex flex-col gap-3'>
                                         <div className='font-semibold'>SIZE</div>
 
                                         {/* <input type="text" placeholder={proDetails.size} name='size' onChange={onChangeInput} className='outline rounded-md p-1' /> */}
@@ -302,23 +302,23 @@ const ProductDetails = () => {
 
                                     </div>
 
-                                    <div className='w-[25vw] flex flex-col gap-3'>
+                                    <div className='lg:w-[25vw] flex flex-col gap-3'>
                                         <div className='font-semibold'>CATEGORY</div>
                                         <input type="text" placeholder={proDetails.category} name='category' onChange={onChangeInput} className='outline rounded-md p-1' />
                                     </div>
 
-                                    <div className='w-[25vw] flex flex-col gap-3'>
+                                    <div className='lg:w-[25vw] flex flex-col gap-3'>
                                         <div className='font-semibold'>PRICE</div>
                                         <input type="text" placeholder={proDetails.price} onChange={onChangeInput} name='price' className='outline rounded-md p-1' />
                                     </div>
 
-                                    <div className='w-[25vw] flex flex-col gap-3'>
+                                    <div className='lg:w-[25vw] flex flex-col gap-3'>
                                         <div className='font-semibold'>CONTENT</div>
                                         <input type="text" placeholder={proDetails.content} className='outline rounded-md p-1' name='content' onChange={onChangeInput}/>
                                     </div>
 
 
-                                    <div className='flex flex-col gap-3 grid-cols-subgrid w-[60vw]'>
+                                    <div className='flex flex-col gap-3 grid-cols-subgrid lg:w-[60vw]'>
                                         {/* <img src={proDetails.images[0].url} alt="" className='w-[15vw] h-[30vh] rounded-2xl object-cover' /> */}
 
                                         <div className='font-semibold '>
@@ -329,13 +329,13 @@ const ProductDetails = () => {
                                         <div>
 
                                             {/* <input type="file"/> */}
-                                            <div className='flex items-center gap-6'>
+                                            <div className='flex lg:flex-row flex-col items-center gap-6'>
 
                                                 <div
                                                     onClick={handleClick}
                                                     onDrop={handleDrop}
                                                     onDragOver={(e) => e.preventDefault()}
-                                                    className="w-[25vw] h-32 border-2 border-dashed border-gray-300 rounded-lg p-4 text-center cursor-pointer focus:outline-none focus:border-blue-500 flex hover:text-[#4A69E] items-center justify-center hover:border-[#4A69E2]"
+                                                    className="lg:w-[25vw] h-32 border-2 border-dashed border-gray-300 rounded-lg p-4 text-center cursor-pointer focus:outline-none focus:border-blue-500 flex hover:text-[#4A69E] items-center justify-center hover:border-[#4A69E2]"
                                                 >
                                                     <input
                                                         ref={inputRef}
@@ -348,7 +348,7 @@ const ProductDetails = () => {
                                                 </div>
 
                                                 {imgPreviews.length > 0 && (
-                                                    <div className="mt-4 grid grid-cols-4 gap-4">
+                                                    <div className="mt-4 grid lg:grid-cols-4 grid-cols-2 gap-4">
                                                         {imgPreviews.map((img, index) => (
                                                             <div
                                                                 key={index}
@@ -357,7 +357,7 @@ const ProductDetails = () => {
                                                                 {/* {console.log(img)} */}
                                                                 {/* {console.log('img URL :', img.url)} */}
                                                                 <img
-                                                                    src={img instanceof File ? URL.createObjectURL(img) : img.url}
+                                                                    src={img instanceof File ? URL.createObjectURL(img) : img?.url}
                                                                     alt={`File Preview ${index + 1}`}
                                                                     className="w-full h-full object-cover"
                                                                 />
@@ -392,7 +392,7 @@ const ProductDetails = () => {
 
                                 <div>
 
-                                    <div className='bg-black flex justify-center items-center gap-1 text-white  w-[15vw] p-3 rounded-xl px-8 mt-7' onClick={() => submitFrm(proDetails._id)}>
+                                    <div className='bg-black flex justify-center items-center gap-1 text-white  lg:w-[15vw] p-3 rounded-xl px-8 mt-7' onClick={() => submitFrm(proDetails._id)}>
                                         UPDATE
                                     </div>
                                 </div>
@@ -405,18 +405,18 @@ const ProductDetails = () => {
 
                         {/* <div>user</div> */}
 
-                        <div className='flex gap-9 justify-between'>
+                        <div className='flex lg:flex-row flex-col gap-5 lg:gap-9 justify-between'>
 
-                            <div className='basis-[70%] grid grid-cols-2 gap-7 rounded-[50px] overflow-hidden'>
+                            <div className='basis-[70%] lg:grid lg:grid-cols-2 lg:gap-7 rounded-[50px] lg:overflow-hidden flex overflow-scroll'>
                                 {
                                     proDetails.images.map(img => (
-                                        <img src={img.url} alt="" className='object-cover lg:w-[250vw] lg:h-[55vh] cursor-zoom-in hover:scale-110' />
+                                        <img src={img?.url} alt="" className='object-cover lg:w-[250vw] lg:h-[55vh] cursor-zoom-in hover:scale-110' />
 
                                     ))
                                 }
                             </div>
 
-                            <div className='basis-[30%]'>
+                            <div className='basis-[30%] px-6 lg:px-0 rounded-[40px] bg-white lg:bg-inherit'>
                                 <div className='mt-10'>
                                     <h6 className='text-4xl font-bold'>{proDetails.title.toUpperCase()}</h6>
 
@@ -460,7 +460,7 @@ const ProductDetails = () => {
 
 
 
-                <Footer />
+                {/* <Footer /> */}
             </div>
         </>
     )

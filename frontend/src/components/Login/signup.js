@@ -110,7 +110,7 @@ const Signup = () => {
         </div>
 
 
-        <Footer />
+        {/* <Footer /> */}
 
       </div>
     </>
