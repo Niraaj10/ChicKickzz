@@ -71,6 +71,7 @@ const CreatePro = () => {
     };
 
     const submitFrm = async () => {
+        // e.preventDefault();
         const imgs = await imgsUrl();
         // console.log(imgs)
 
@@ -78,10 +79,15 @@ const CreatePro = () => {
         // console.log(product)
         console.log(product)
 
-        
 
-
-
+        try {
+          await axios.post('/api/products', { ...product })
+  
+    
+        } catch (error) {
+          alert(error.response.data.msg)
+          console.log(error)
+        }     
 
     };
 

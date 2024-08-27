@@ -23,7 +23,7 @@ const ProductDetails = () => {
     const updateImgPreviews = (pro) => {
         const imagePrev = pro?.images || [];
         setImgPreviews(imagePrev);
-        console.log(imgPreviews)
+        // console.log(imgPreviews)
     };
 
     useEffect(() => {
@@ -95,11 +95,63 @@ const ProductDetails = () => {
         }
     }
 
+    const onChangeInput = (e) => {
+        const { name, value } = e.target;
+        // console.log(name, value)
+        setProDetails({ ...proDetails, [name]: value })
+    }
+
+
+    const submitFrm = async (proId) => {
+        // e.preventDefault();
+        const imgs = await imgsUrl();
+        // console.log(imgs)
+
+        // if (imgs.length > 0) {
+        //     setProDetails((prevDetails) => ({
+        //         ...prevDetails,
+        //         images: [...(prevDetails.images || []), ...imgs]
+        //     }));
+        // }
+
+        let updatedDetails = { ...proDetails };
+
+    if (imgs.length > 0) {
+        updatedDetails = {
+            ...updatedDetails,
+            images: [...(updatedDetails.images || []), ...imgs]
+        };
+    }
+
+        // setProDetails({...proDetails, images: imgPreviews})
+
+        console.log(proDetails)
+
+
+        try {
+
+            // await new Promise((resolve) => {
+            //     setProDetails((prevDetails) => {
+            //         resolve(prevDetails);
+            //     });
+            // });
+
+          await axios.put(`/api/products/${proId}`, updatedDetails)  
+          console.log('Product Updateed : ',proId)       
+    
+    
+        } catch (error) {
+          alert(error.response.data.msg)
+          console.log(error)
+        }   
+
+    };
+
 
 
     const imgsUrl = async () => {
         // console.log(imgPreviews)
-        setLoading(true); 
+        // setLoading(true); 
         try {
             const formData = new FormData();
             let hasFiles = false;
@@ -118,15 +170,16 @@ const ProductDetails = () => {
                     },
                 });
     
-                console.log('Uploaded Files:', res.data);                 
-                setLoading(false)             
+                
+                console.log('Uploaded Files:', res.data);   
+                // setLoading(false)             
                 return res.data;
                 
                 // console.log(res)
             } else {
                 alert('No files to upload.'); 
                 return [];
-            }
+            } 
 
 
         } catch (error) {
@@ -136,14 +189,6 @@ const ProductDetails = () => {
     };
 
 
-    const submitFrm = async () => {
-        const imgs = await imgsUrl();
-        // console.log(imgs)  
-
-
-
-
-    };
 
     // console.log(proDetails.images)
 
@@ -226,18 +271,21 @@ const ProductDetails = () => {
                                 </div>
                             </div>
 
-                            <div className='IpdateForm basis-[70%] bg-white rounded-2xl border border-black p-7'>
+
+
+
+                            <div className='IpdateForm basis-[70%] bg-white rounded-2xl p-7'>
 
                                 <form action="" className='grid grid-cols-2 gap-4 '>
 
                                     <div className='w-[25vw] flex flex-col gap-3'>
                                         <div className='font-semibold'>PRODUCT NAME / TITLE</div>
-                                        <input type="text" placeholder={proDetails.title} className='outline rounded-md p-1' />
+                                        <input type="text" placeholder={proDetails.title} name='title' onChange={onChangeInput} className='outline rounded-md p-1' />
                                     </div>
 
                                     <div className='w-[25vw] flex flex-col gap-3'>
                                         <div className='font-semibold'>DESCRIPTION</div>
-                                        <textarea name="ProDescription" id="" className='outline rounded-md p-1' placeholder={proDetails.description}>
+                                        <textarea name="description" id="Description"  onChange={onChangeInput} className='outline rounded-md p-1' placeholder={proDetails.description}>
 
                                         </textarea>
 
@@ -246,7 +294,7 @@ const ProductDetails = () => {
                                     <div className='w-[25vw] flex flex-col gap-3'>
                                         <div className='font-semibold'>SIZE</div>
 
-                                        <input type="text" placeholder={proDetails.size} className='outline rounded-md p-1' />
+                                        <input type="text" placeholder={proDetails.size} name='size' onChange={onChangeInput} className='outline rounded-md p-1' />
 
                                         {/* <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
                                         <label for="vehicle1"> I have a bike</label> */}
@@ -255,17 +303,17 @@ const ProductDetails = () => {
 
                                     <div className='w-[25vw] flex flex-col gap-3'>
                                         <div className='font-semibold'>CATEGORY</div>
-                                        <input type="text" placeholder={proDetails.category} className='outline rounded-md p-1' />
+                                        <input type="text" placeholder={proDetails.category} name='category' onChange={onChangeInput} className='outline rounded-md p-1' />
                                     </div>
 
                                     <div className='w-[25vw] flex flex-col gap-3'>
                                         <div className='font-semibold'>PRICE</div>
-                                        <input type="text" placeholder={proDetails.price} className='outline rounded-md p-1' />
+                                        <input type="text" placeholder={proDetails.price} onChange={onChangeInput} name='price' className='outline rounded-md p-1' />
                                     </div>
 
                                     <div className='w-[25vw] flex flex-col gap-3'>
                                         <div className='font-semibold'>CONTENT</div>
-                                        <input type="text" placeholder={proDetails.content} className='outline rounded-md p-1' />
+                                        <input type="text" placeholder={proDetails.content} className='outline rounded-md p-1' name='content' onChange={onChangeInput}/>
                                     </div>
 
 
@@ -305,8 +353,8 @@ const ProductDetails = () => {
                                                                 key={index}
                                                                 className="relative w-24 h-24 border border-gray-300 rounded overflow-hidden"
                                                             >
-                                                                {console.log(img)}
-                                                                {console.log('img URL :', img.url)}
+                                                                {/* {console.log(img)} */}
+                                                                {/* {console.log('img URL :', img.url)} */}
                                                                 <img
                                                                     src={img instanceof File ? URL.createObjectURL(img) : img.url}
                                                                     alt={`File Preview ${index + 1}`}
@@ -324,11 +372,11 @@ const ProductDetails = () => {
                                                 )}
 
 
-                                                <div>
+                                                {/* <div>
                                                     <div className='bg-black flex justify-center items-center gap-1 text-white  w-[6vw] p-3 rounded-xl px-3' onClick={imgsUrl}>
                                                         UPDATE
                                                     </div>
-                                                </div>
+                                                </div> */}
 
                                             </div>
 
@@ -343,7 +391,7 @@ const ProductDetails = () => {
 
                                 <div>
 
-                                    <div className='bg-black flex justify-center items-center gap-1 text-white  w-[15vw] p-3 rounded-xl px-8 mt-7'>
+                                    <div className='bg-black flex justify-center items-center gap-1 text-white  w-[15vw] p-3 rounded-xl px-8 mt-7' onClick={() => submitFrm(proDetails._id)}>
                                         UPDATE
                                     </div>
                                 </div>
