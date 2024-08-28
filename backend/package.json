@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "backend.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node backend.js",
     "dev": "nodemon backend.js",
     "build": "echo 'No build necessary for backend'"
   },
