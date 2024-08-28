@@ -6,8 +6,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 
-/*Blue : #4A69E2  */
-/*Orange : #FFA52F  */
+.some-class {
+  color: red;
+  background-color: blue; /* Missing semicolon after 'color: red' */
+}
+
+/* Invalid CSS property example */
+.another-class {
+  color: red; /* 'colro' is a typo and not a valid CSS property */
+}
 body {
   background-color: #E7E7E3;
   margin: 0;
