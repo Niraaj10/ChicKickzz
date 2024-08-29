@@ -5,7 +5,9 @@ import { RiDeleteBin2Line } from 'react-icons/ri'
 import axios from 'axios';
 import { useRef } from 'react';
 
+
 const ProductDetails = () => {
+    const SERVER_URL = 'https://chickickzz-3.onrender.com';
     const inputRef = useRef(null);
     const [imgPreviews, setImgPreviews] = useState([]);
     const [proDetails, setProDetails] = useState([]);
@@ -85,7 +87,7 @@ const ProductDetails = () => {
         if (window.confirm(`You want to delete this product : ${proTitle}`)) {
 
             try {
-                await axios.delete(`/api/products/${proId}`)
+                await axios.delete(`${SERVER_URL}/api/products/${proId}`)
                 console.log('Deleted : ' + proId)
                 window.location.reload()
             } catch (error) {
@@ -136,7 +138,7 @@ const ProductDetails = () => {
             //     });
             // });
 
-          await axios.put(`/api/products/${proId}`, updatedDetails)  
+          await axios.put(`${SERVER_URL}/api/products/${proId}`, updatedDetails)  
           console.log('Product Updateed : ',proId)       
     
     
@@ -164,7 +166,7 @@ const ProductDetails = () => {
             });
 
             if (hasFiles) {
-                const res = await axios.post('/api/upload', formData, {
+                const res = await axios.post(`${SERVER_URL}/api/upload`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },

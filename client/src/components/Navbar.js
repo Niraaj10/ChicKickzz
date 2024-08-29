@@ -12,6 +12,7 @@ import { AiOutlineAppstore, AiOutlineAppstoreAdd } from 'react-icons/ai'
 
 
 const Navbar = () => {
+    const SERVER_URL = 'https://chickickzz-3.onrender.com';
     const state = useContext(GlobalState)
     // console.log(state)
 
@@ -46,7 +47,7 @@ const Navbar = () => {
 
 
     const logoutUser = async () => {
-        await axios.get('/user/logout')
+        await axios.get(`${SERVER_URL}/user/logout`)
 
         localStorage.clear()
         setIsAdmin(false)

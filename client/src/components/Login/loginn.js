@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 
 const Login = () => {
+  const SERVER_URL = 'https://chickickzz-3.onrender.com';
   const [user, setUser] = useState({
     email: '',
     password: ''
@@ -18,7 +19,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      await axios.post('/user/login', { ...user })
+      await axios.post(`${SERVER_URL}/user/login`, { ...user })
       // console.log({...user})
       console.log(user)
 

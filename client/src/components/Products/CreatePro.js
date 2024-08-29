@@ -4,6 +4,7 @@ import axios from 'axios';
 import { CircularProgress } from '@mui/material';
 
 const CreatePro = () => {
+    const SERVER_URL = 'https://chickickzz-3.onrender.com';
     const inputRef = useRef(null);
     const [imgPreviews, setImgPreviews] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -54,7 +55,7 @@ const CreatePro = () => {
                 formData.append('files', file);
             });
 
-            const res = await axios.post('/api/upload', formData, {
+            const res = await axios.post(`${SERVER_URL}/api/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -90,7 +91,7 @@ const CreatePro = () => {
 
         try {
             // await axios.post('/api/products', { ...product })
-            await axios.post('/api/products', updatedDetails )
+            await axios.post(`${SERVER_URL}/api/products`, updatedDetails )
             setLoading(false);
 
         } catch (error) {

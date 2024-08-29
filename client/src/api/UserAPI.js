@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react'
 
 const UserAPI = (token) => {
+    const SERVER_URL = 'https://chickickzz-3.onrender.com';
     const [isLogged, setIsLogged] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
     const [cart, setCart] = useState([]);
@@ -10,7 +11,7 @@ const UserAPI = (token) => {
         if (token) {
             const getUser = async () => {
                 try {
-                    const res = await axios.get('/user/info', {
+                    const res = await axios.get(`${SERVER_URL}/user/info`, {
                         headers: { Authorization: token }
                     })
 

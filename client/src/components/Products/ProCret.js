@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 
 const FileUploadComponent = () => {
+    const SERVER_URL = 'https://chickickzz-3.onrender.com';
     const [imgPreviews, setImgPreviews] = useState([]); // Assuming imgPreviews is an array of File objects
 
     const handleFileChange = (e) => {
@@ -17,7 +18,7 @@ const FileUploadComponent = () => {
                 formData.append('files', file); // 'files' should match the key expected by the backend
             });
 
-            const res = await axios.post('/api/upload', formData, {
+            const res = await axios.post(`${SERVER_URL}/api/upload`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

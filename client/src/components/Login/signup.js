@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 
 const Signup = () => {
+  const SERVER_URL = 'https://chickickzz-3.onrender.com';
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -19,14 +20,14 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      await axios.post('/user/signup', { ...user })
+      await axios.post(`${SERVER_URL}/user/signup`, { ...user })
       // console.log({...user})
       // console.log(user)
 
-      localStorage.setItem('Login User', true)
+      localStorage.setItem(`${SERVER_URL}Login User`, true)
       // localStorage.setItem('Signup User', true)
 
-      window.location.href = '/'
+      window.location.href = `${SERVER_URL}`
       // window.location.href = '/login'
 
 
