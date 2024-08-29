@@ -89,10 +89,14 @@ app.use(fileUpload({
 }));
 
 // Routes
-app.use('/api/user', require('./routes/useRouter')); // Updated to be under /api
-app.use('/api/categories', require('./routes/categoryRoutes')); // More descriptive route
-app.use('/api/products', require('./routes/productRoutes')); // More descriptive route
-app.use('/api/upload', require('./routes/upload')); // More descriptive route
+// app.use('/api/user', require('./routes/useRouter')); // Updated to be under /api
+// app.use('/api/categories', require('./routes/categoryRoutes')); // More descriptive route
+// app.use('/api/products', require('./routes/productRoutes')); // More descriptive route
+// app.use('/api/upload', require('./routes/upload')); // More descriptive route
+app.use('/user',require('./routes/useRouter'))
+app.use('/api',require('./routes/categoryRoutes'))
+app.use('/api',require('./routes/productRoutes'))
+app.use('/api',require('./routes/upload'))
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
