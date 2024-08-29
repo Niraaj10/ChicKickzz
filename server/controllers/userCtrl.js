@@ -35,7 +35,7 @@ const userCtrl = {
             //cookieee
             res.cookie('refToken', refreshtoken, {
                 httpOnly:true,
-                path:'/user/refTokenn'
+                path:'/user/refToken'
                 // path:'/user/ref_token'
             });
 
@@ -84,7 +84,7 @@ const userCtrl = {
             //cookieee
             res.cookie('refToken', refreshtoken, {
                 httpOnly:true,
-                path:'/user/refTokenn'
+                path:'/user/refToken'
                 // path:'/user/ref_token'
             });    
                 
@@ -99,7 +99,7 @@ const userCtrl = {
         try {
             res.clearCookie(
                 'refToken',
-                {path:'/user/refTokenn'}
+                {path:'/user/refToken'}
             )
             return res.json({'msg':"Logout Successfull"})
         } catch (error) {

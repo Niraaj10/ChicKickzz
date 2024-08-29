@@ -7,6 +7,7 @@ import UserAPI from "./api/UserAPI";
 export const GlobalState = createContext();
 
 export const DataProvider = ({ children }) => {
+    const SERVER_URL = 'https://chickickzz-3.onrender.com';
     // productAPI();
 
     const [token, setToken] = useState(false);
@@ -14,7 +15,7 @@ export const DataProvider = ({ children }) => {
 
     const refToken = async () => {
         // const res = await axios.get('/user/refTokenn')
-        const res = await axios.post('/user/refTokenn')
+        const res = await axios.post(`${SERVER_URL}/user/refTokenn`)
 
         // console.log(res)
         setToken(res.data.accesstoken)
