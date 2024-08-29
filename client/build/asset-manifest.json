@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/static/css/main.fb48ec29.css",
-    "main.js": "/static/js/main.826ee837.js",
+    "main.js": "/static/js/main.da593e01.js",
     "static/media/nikeShoeHome.jpg": "/static/media/nikeShoeHome.208b9ea9af0686b97ba0.jpg",
     "static/media/fire.png": "/static/media/fire.01e95ee7ee3ea9f48bf1.png",
     "static/media/Logo.svg": "/static/media/Logo.5c13da8526b137c42d84f647ac4d3b6f.svg",
     "index.html": "/index.html",
     "main.fb48ec29.css.map": "/static/css/main.fb48ec29.css.map",
-    "main.826ee837.js.map": "/static/js/main.826ee837.js.map"
+    "main.da593e01.js.map": "/static/js/main.da593e01.js.map"
   },
   "entrypoints": [
     "static/css/main.fb48ec29.css",
-    "static/js/main.826ee837.js"
+    "static/js/main.da593e01.js"
   ]
 }

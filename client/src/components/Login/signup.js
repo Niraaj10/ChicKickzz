@@ -20,11 +20,11 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      await axios.post(`${SERVER_URL}/user/signup`, { ...user })
+      const res = await axios.post(`${SERVER_URL}/user/signup`, { ...user })
       // console.log({...user})
       // console.log(user)
-
-      localStorage.setItem(`${SERVER_URL}Login User`, true)
+      localStorage.setItem('userId', res.data.user._id);
+      localStorage.setItem(`Login User`, true)
       // localStorage.setItem('Signup User', true)
 
       window.location.href = `${SERVER_URL}`

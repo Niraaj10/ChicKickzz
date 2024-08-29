@@ -7,25 +7,43 @@ const UserAPI = (token) => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [cart, setCart] = useState([]);
 
+    // useEffect(() => {
+    //     if (token) {
+    //         const getUser = async () => {
+    //             try {
+    //                 const res = await axios.get(`${SERVER_URL}/user/info`, {
+    //                     headers: { Authorization: token }
+    //                 })
+
+    //                 // console.log(res)
+
+    //                 setIsLogged(true)
+    //                 res.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false)
+    //             } catch (error) {
+    //                 alert(error.response.data.msg)
+    //             }
+    //         }
+    //         getUser()
+    //     }
+    // }, [token]);
+
     useEffect(() => {
-        if (token) {
+        const userId = localStorage.getItem('userId'); 
+
+        if (userId) {
             const getUser = async () => {
                 try {
-                    const res = await axios.get(`${SERVER_URL}/user/info`, {
-                        headers: { Authorization: token }
-                    })
+                    const res = await axios.get(`/user/info/${userId}`); 
 
-                    // console.log(res)
-
-                    setIsLogged(true)
-                    res.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false)
+                    setIsLogged(true);
+                    res.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false);
                 } catch (error) {
-                    alert(error.response.data.msg)
+                    alert(error.response.data.msg);
                 }
-            }
-            getUser()
+            };
+            getUser();
         }
-    }, [token]);
+    }, []);
 
 
 
@@ -42,7 +60,7 @@ const UserAPI = (token) => {
         
         if (check) {
             // setCart([...cart, {...product, quantity: 1}]);
-            console.log(cart);
+            // console.log(cart);
             setCart([...cart, { ...product, quantity: 1 }]);
         } else {
             // console.log(cart);

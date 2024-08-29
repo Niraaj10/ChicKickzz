@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const userCtrl = {
+
     signup: async (req,res) => {
         // res.json({"msg":"Testinggg Controllerss"})
         try {
@@ -29,41 +30,41 @@ const userCtrl = {
             await newUser.save();
 
             //jwt authentication
-            const accesstoken = createToken({id:newUser._id});
-            const refreshtoken = createRefToken({id:newUser._id});
+            // const accesstoken = createToken({id:newUser._id});
+            // const refreshtoken = createRefToken({id:newUser._id});
 
-            //cookieee
-            res.cookie('refToken', refreshtoken, {
-                httpOnly:true,
-                path:'/user/refToken'
-                // path:'/user/ref_token'
-            });
+            // //cookieee
+            // res.cookie('refToken', refreshtoken, {
+            //     httpOnly:true,
+            //     path:'/user/refToken'
+            //     // path:'/user/ref_token'
+            // });
 
-            // res.json({"msg":"Signup successfullll!"});
-            res.json({accesstoken});
+            res.json({"msg":"Signup successfullll!"});
+            // res.json({accesstoken});
             
         } catch (error) {
             return res.status(500).json({"msg":error.message})
         }
     },
 
-    refToken: async (req,res) => {
-        try {
-            const rf_token = req.cookies.refToken;
+    // refToken: async (req,res) => {
+    //     try {
+    //         const rf_token = req.cookies.refToken;
     
-            if(!rf_token) return res.status(400).json({"msg":"Please Login or Signuppp"});
-            // if(!rf_token) return res.status(300).json({"msg":"Please Login or Signuppp"});
+    //         if(!rf_token) return res.status(400).json({"msg":"Please Login or Signuppp"});
+    //         // if(!rf_token) return res.status(300).json({"msg":"Please Login or Signuppp"});
     
-            jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err,user) => {
-                if(err) return res.status(400).json({"msg":"Please Login or Signup"});
-                const accesstoken = createToken({id:user.id})
-                res.json({user,accesstoken});  
-            })
-            // res.json({rf_token});
-        } catch (error) {
-            return res.status(500).json({'msg':error.message})
-        }
-    },
+    //         jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err,user) => {
+    //             if(err) return res.status(400).json({"msg":"Please Login or Signup"});
+    //             const accesstoken = createToken({id:user.id})
+    //             res.json({user,accesstoken});  
+    //         })
+    //         // res.json({rf_token});
+    //     } catch (error) {
+    //         return res.status(500).json({'msg':error.message})
+    //     }
+    // },
 
 
 
@@ -78,18 +79,18 @@ const userCtrl = {
             if(!matchedUser) return res.status(400).json({'msg':"Incorrect Password"})
             
             //jwt authentication
-            const accesstoken = createToken({id:user._id});
-            const refreshtoken = createRefToken({id:user._id});
+            // const accesstoken = createToken({id:user._id});
+            // const refreshtoken = createRefToken({id:user._id});
 
-            //cookieee
-            res.cookie('refToken', refreshtoken, {
-                httpOnly:true,
-                path:'/user/refToken'
-                // path:'/user/ref_token'
-            });    
+            // //cookieee
+            // res.cookie('refToken', refreshtoken, {
+            //     httpOnly:true,
+            //     path:'/user/refToken'
+            //     // path:'/user/ref_token'
+            // });    
                 
-            // res.json({'msg':"Login Success"})
-            res.json({accesstoken})
+            res.json({'msg':"Login Success"})
+            // res.json({accesstoken})
         } catch (error) {
             return res.status(500).json({'msg':error.message})
         }
@@ -97,11 +98,13 @@ const userCtrl = {
 
     logout: async (req,res) => {
         try {
-            res.clearCookie(
-                'refToken',
-                {path:'/user/refToken'}
-            )
-            return res.json({'msg':"Logout Successfull"})
+            // res.clearCookie(
+            //     'refToken',
+            //     {path:'/user/refToken'}
+            // )
+            // return res.json({'msg':"Logout Successfull"})
+
+            res.json({'msg':"Logout Successfull"})
         } catch (error) {
             return res.status(500).json({'msg':error.message})
         }

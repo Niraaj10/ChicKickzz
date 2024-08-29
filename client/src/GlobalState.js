@@ -8,27 +8,37 @@ export const GlobalState = createContext();
 
 export const DataProvider = ({ children }) => {
     const SERVER_URL = 'https://chickickzz-1.onrender.com';
+    // const SERVER_URL = 'https://chickickzz-1.onrender.com';
     // productAPI();
 
-    const [token, setToken] = useState(false);
-    // const [loginUser, setLoginUser] = useState('');
+    // const [token, setToken] = useState(false);
+    const [loginUser, setLoginUser] = useState('');
 
-    const refToken = async () => {
-        // const res = await axios.get('/user/refTokenn')
-        const res = await axios.post(`${SERVER_URL}/user/refToken`)
+    // const refToken = async () => {
+    //     // const res = await axios.get('/user/refTokenn')
+    //     const res = await axios.get(`${SERVER_URL}/user/refToken`)
+    //     // const res = await axios.get('https://chickickzz-3.onrender.com/user/refToken', data, {
+    //     //     withCredentials: true,
+    //     // });
 
-        // console.log(res)
-        setToken(res.data.accesstoken)
-    }
+    //     // console.log(res)
+    //     // setToken(res.data.accesstoken)
+    //     setToken(res.data.refToken)
+    // }
 
     useEffect(() => {
-        const LoginUser = localStorage.getItem('Login User')
+        // const LoginUser = localStorage.getItem('Login User')
 
         /////////////////////////////////////////////////////
-        if(LoginUser) refToken()
+        // if(LoginUser) refToken()
         // if (loginUser) {
         //     refToken();
         // }
+
+        const loginUserFromStorage = localStorage.getItem('Login User');
+        if (loginUserFromStorage) {
+            setLoginUser(loginUserFromStorage);
+        }
          
     }, []);
     // }, [loginUser]);
@@ -48,9 +58,10 @@ export const DataProvider = ({ children }) => {
     // }, []);
 
     const state = {
-        token: [token, setToken],
+        // token: [token, setToken],
         productAPI: ProductAPI(),
-        userAPI: UserAPI(token)
+        userAPI: UserAPI(token),
+        loginUser: [loginUser, setLoginUser]
     }
     // console.log(UserAPI)
 

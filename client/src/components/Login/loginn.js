@@ -23,6 +23,10 @@ const Login = () => {
       // console.log({...user})
       console.log(user)
 
+      const userId = res.data.userId;
+
+      localStorage.setItem('userId', userId);
+
       localStorage.setItem('Login User', true)
 
       window.location.href = '/'
