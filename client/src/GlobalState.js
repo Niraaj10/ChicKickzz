@@ -60,7 +60,7 @@ export const DataProvider = ({ children }) => {
     const state = {
         // token: [token, setToken],
         productAPI: ProductAPI(),
-        userAPI: UserAPI(token),
+        userAPI: UserAPI(),
         loginUser: [loginUser, setLoginUser]
     }
     // console.log(UserAPI)

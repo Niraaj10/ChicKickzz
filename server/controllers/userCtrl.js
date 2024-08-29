@@ -40,7 +40,7 @@ const userCtrl = {
             //     // path:'/user/ref_token'
             // });
 
-            res.json({"msg":"Signup successfullll!"});
+            res.json({"msg":"Signup successfullll!",  userId: user._id});
             // res.json({accesstoken});
             
         } catch (error) {
@@ -89,7 +89,7 @@ const userCtrl = {
             //     // path:'/user/ref_token'
             // });    
                 
-            res.json({'msg':"Login Success"})
+            res.json({'msg':"Login Success", userId: user._id})
             // res.json({accesstoken})
         } catch (error) {
             return res.status(500).json({'msg':error.message})

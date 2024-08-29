@@ -33,7 +33,7 @@ const UserAPI = (token) => {
         if (userId) {
             const getUser = async () => {
                 try {
-                    const res = await axios.get(`/user/info/${userId}`); 
+                    const res = await axios.get(`${SERVER_URL}/user/info/${userId}`); 
 
                     setIsLogged(true);
                     res.data.role === 1 ? setIsAdmin(true) : setIsAdmin(false);
