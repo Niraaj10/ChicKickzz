@@ -10,6 +10,6 @@ routes.post('/signup',userCtrl.signup)
 routes.post('/login',userCtrl.login)
 routes.get('/logout',userCtrl.logout)
 // routes.post('/refToken',userCtrl.refToken)
-routes.get('/info/:id', auth, userCtrl.getUser)
+routes.get('/info/:id', userCtrl.getUser)
 
 module.exports = routes
