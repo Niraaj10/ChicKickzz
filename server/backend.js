@@ -66,16 +66,17 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-require('dotenv').config();
 const fileUpload = require('express-fileupload');
 const path = require('path');
+require('dotenv').config();
 
 const app = express();
 
 // Middleware
-console.log(process.env.CLIENT_URL)
+console.log(process.env.CLIENT_URL);
+
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000', // frontend URL from environment variable
+    origin: process.env.CLIENT_URL || 'http://localhost:3000', // Frontend URL from environment variable
     methods: 'GET,POST,PUT,DELETE',
     credentials: true
 }));
@@ -88,10 +89,10 @@ app.use(fileUpload({
 }));
 
 // Routes
-app.use('/user', require('./routes/useRouter'));
-app.use('/api', require('./routes/categoryRoutes'));
-app.use('/api', require('./routes/productRoutes'));
-app.use('/api', require('./routes/upload'));
+app.use('/api/user', require('./routes/useRouter')); // Updated to be under /api
+app.use('/api/categories', require('./routes/categoryRoutes')); // More descriptive route
+app.use('/api/products', require('./routes/productRoutes')); // More descriptive route
+app.use('/api/upload', require('./routes/upload')); // More descriptive route
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
@@ -113,14 +114,16 @@ const URI = process.env.MONGODB_URL;
 mongoose.connect(URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-}).then(() => {
-    console.log("MongoDB is connected....");
-}).catch(err => {
-    console.log(err);
-});
+})
+.then(() => console.log("MongoDB is connected..."))
+.catch(err => console.error(err));
 
 // Start the server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}...`);
-});
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}...`);
+    });
+}
+
+module.exports = app; // Export app for serverless deployment
