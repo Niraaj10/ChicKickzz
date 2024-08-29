@@ -58,7 +58,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className='Navbar fixed top-0 z-50 w-[92vw] flex justify-between items-center my-6 p-6 py-4 bg-white rounded-3xl shadow-custom mb-4' >
+            <nav className='Navbar fixed top-0 z-50 w-[92vw] flex justify-between items-center my-6 p-6 py-4 bg-white rounded-3xl boxShadow mb-4' >
 
                 <div>
                     {/* <TiThMenu size={25} className='lg:hidden md:hidden' /> */}
