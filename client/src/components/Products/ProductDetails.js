@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { GlobalState } from '../../GlobalState';
 import { RiDeleteBin2Line } from 'react-icons/ri'
-import Footer from '../footerr/Footer';
 import axios from 'axios';
 import { useRef } from 'react';
 
@@ -12,6 +11,7 @@ const ProductDetails = () => {
     const [proDetails, setProDetails] = useState([]);
     const params = useParams();
     const [loading, setLoading] = useState(false);
+    console.log(setLoading)
 
     const state = useContext(GlobalState)
     const [products] = state.productAPI.products;
@@ -72,14 +72,14 @@ const ProductDetails = () => {
         }
     };
 
-    const remProImg = (ind) => {
-        setProDetails((prevProDetails) => ({
-            ...prevProDetails,
-            images: prevProDetails.images.filter((img, index) => index !== ind)
-        }));
-        console.log(proDetails.images);
+    // const remProImg = (ind) => {
+    //     setProDetails((prevProDetails) => ({
+    //         ...prevProDetails,
+    //         images: prevProDetails.images.filter((img, index) => index !== ind)
+    //     }));
+    //     console.log(proDetails.images);
 
-    };
+    // };
 
     const deletePro = async (proId, proTitle) => {
         if (window.confirm(`You want to delete this product : ${proTitle}`)) {

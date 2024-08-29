@@ -37,11 +37,11 @@ const FileUploadComponent = () => {
         imgsUrl();
     };
 
-    const remImg = (indexToRemove) => {
-        setImgPreviews((prevPreviews) =>
-          prevPreviews.filter((_, index) => index !== indexToRemove)
-        );
-    };
+    // const remImg = (indexToRemove) => {
+    //     setImgPreviews((prevPreviews) =>
+    //       prevPreviews.filter((_, index) => index !== indexToRemove)
+    //     );
+    // };
 
     return (
         <div>

@@ -1,14 +1,12 @@
 import React, { useContext } from 'react'
 import logo from '../assests/svg/Logo.svg'
 import fire from '../assests/img/fire.png'
-import { TiThMenu } from 'react-icons/ti'
 import { Link } from 'react-router-dom'
 import { FaUser } from 'react-icons/fa6'
 import { FaSearch } from 'react-icons/fa'
 import { GlobalState } from '../GlobalState'
 import axios from 'axios'
 import { HiOutlineLogout } from 'react-icons/hi'
-import { IoMdAddCircle } from 'react-icons/io'
 import { AiOutlineAppstore, AiOutlineAppstoreAdd } from 'react-icons/ai'
 // import { Link } from 'react-router-dom'
 
@@ -20,19 +18,19 @@ const Navbar = () => {
     const [isLogged, setIsLogged] = state.userAPI.isLogged
     const [isAdmin, setIsAdmin] = state.userAPI.isAdmin
     const [cart] = state.userAPI.cart;
-    const totalItems = cart.reduce((total, product) => total + product.quantity, 0);
+    // const totalItems = cart.reduce((total, product) => total + product.quantity, 0);
 
     // console.log(isLogged)
 
 
-    const adminRoutes = () => {
-        return (
-            <>
-                <li><Link to='/addProduct'>Add Product</Link></li>
-                <li><Link to='/category'>Categories</Link></li>
-            </>
-        )
-    }
+    // const adminRoutes = () => {
+    //     return (
+    //         <>
+    //             <li><Link to='/addProduct'>Add Product</Link></li>
+    //             <li><Link to='/category'>Categories</Link></li>
+    //         </>
+    //     )
+    // }
 
     const loggedRoutes = () => {
         return (

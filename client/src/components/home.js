@@ -1,12 +1,9 @@
 import React, { useContext } from 'react'
 import { GlobalState } from '../GlobalState'
-import Navbar from './Navbar'
 import nikeShoe from '../assests/img/nikeShoeHome.jpg'
 import { Link } from 'react-router-dom'
-import Footer from './footerr/Footer'
 import Products from './Products/products'
 import fire from '../assests/img/fire.png'
-import ProCret from './Products/ProCret'
 
 const Home = () => {
     const state = useContext(GlobalState)

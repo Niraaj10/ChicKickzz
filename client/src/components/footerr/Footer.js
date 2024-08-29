@@ -1,7 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import logo from '../svg/Logo.svg'
-import { FaFacebook, FaTwitter, FaYoutube } from 'react-icons/fa6'
+import { FaFacebook, FaTwitter } from 'react-icons/fa6'
 import { FaInstagram } from 'react-icons/fa'
 import { FiYoutube } from 'react-icons/fi'
 

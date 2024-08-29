@@ -10,7 +10,7 @@ export const DataProvider = ({ children }) => {
     // productAPI();
 
     const [token, setToken] = useState(false);
-    const [loginUser, setLoginUser] = useState('');
+    // const [loginUser, setLoginUser] = useState('');
 
     const refToken = async () => {
         // const res = await axios.get('/user/refTokenn')

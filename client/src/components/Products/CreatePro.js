@@ -1,5 +1,4 @@
 import React, { useRef } from 'react'
-import Footer from '../footerr/Footer'
 import { useState } from 'react';
 import axios from 'axios';
 import { CircularProgress } from '@mui/material';

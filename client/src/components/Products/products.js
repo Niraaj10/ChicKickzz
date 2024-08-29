@@ -3,7 +3,6 @@ import { GlobalState } from '../../GlobalState'
 import ProductCard from './ProductCard'
 import { FiPlusCircle } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
-import Footer from '../footerr/Footer'
 
 const Products = () => {
   const state = useContext(GlobalState)

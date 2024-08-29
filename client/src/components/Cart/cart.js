@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { GlobalState } from '../../GlobalState'
 import { Link } from 'react-router-dom'
 import fire from '../img/fire.png'
-import Footer from '../footerr/Footer'
 import { RiDeleteBinLine } from 'react-icons/ri'
 
 const Cart = () => {
