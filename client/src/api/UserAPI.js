@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react'
 
 const UserAPI = (token) => {
-    const SERVER_URL = 'https://chickickzz-3.onrender.com';
+    const SERVER_URL = 'https://chickickzz-1.onrender.com';
     const [isLogged, setIsLogged] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
     const [cart, setCart] = useState([]);

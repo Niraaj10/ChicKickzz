@@ -5,13 +5,14 @@ import { RiDeleteBin2Line } from 'react-icons/ri'
 import { Link } from 'react-router-dom'
 
 const ProductCard = ({ product, isAdmin }) => {
+  const SERVER_URL = 'https://chickickzz-1.onrender.com';
   console.log(product)
 
   const deletePro = async (proId, proTitle) => {
     if (window.confirm(`You want to delete this product : ${proTitle}`)) {
       
       try {
-        await axios.delete(`/api/products/${proId}`)
+        await axios.delete(`${SERVER_URL}/api/products/${proId}`)
         console.log('Deleted : ' + product._id)
         window.location.reload()
       } catch (error) {

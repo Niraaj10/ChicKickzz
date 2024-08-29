@@ -7,7 +7,7 @@ import { useRef } from 'react';
 
 
 const ProductDetails = () => {
-    const SERVER_URL = 'https://chickickzz-3.onrender.com';
+    const SERVER_URL = 'https://chickickzz-1.onrender.com';
     const inputRef = useRef(null);
     const [imgPreviews, setImgPreviews] = useState([]);
     const [proDetails, setProDetails] = useState([]);

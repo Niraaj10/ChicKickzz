@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 
 const Signup = () => {
-  const SERVER_URL = 'https://chickickzz-3.onrender.com';
+  const SERVER_URL = 'https://chickickzz-1.onrender.com';
   const [user, setUser] = useState({
     name: '',
     email: '',
