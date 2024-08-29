@@ -112,24 +112,15 @@ const userCtrl = {
 
     getUser: async (req,res) => {
         try {
-            const user = await Users.findById(req.user.id).select('-password')
-            // res.json(req.user);
+            const user = await Users.findById(req.params.id).select('-password');
+            if (!user) return res.status(400).json({ "msg": "User not found" });
 
-            if(!user) return res.status(400).json({'msg':"User not found"})
-            
-            res.json(user)
+            res.json(user);
         } catch (error) {
             return res.status(500).json({'msg':error.message})
         }
     },
 }
 
-const createToken = (userr) => {
-    return jwt.sign(userr, process.env.ACCESS_TOKEN_SECRET,{expiresIn:'1d'})
-}
-
-const createRefToken = (userr) => {
-    return jwt.sign(userr, process.env.REFRESH_TOKEN_SECRET,{expiresIn:'7d'})
-}
 
 module.exports = userCtrl
