@@ -73,6 +73,7 @@ const path = require('path');
 const app = express();
 
 // Middleware
+console.log(process.env.CLIENT_URL)
 app.use(cors({
     origin: process.env.CLIENT_URL || 'http://localhost:3000', // frontend URL from environment variable
     methods: 'GET,POST,PUT,DELETE',
