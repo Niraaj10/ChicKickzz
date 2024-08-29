@@ -32,7 +32,7 @@ const Login = () => {
 
       localStorage.setItem('Login User', true)
 
-      // window.location.href = '/'
+      window.location.href = '/'
 
 
     } catch (error) {

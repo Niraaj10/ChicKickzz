@@ -27,7 +27,7 @@ const Signup = () => {
       localStorage.setItem(`Login User`, true)
       // localStorage.setItem('Signup User', true)
 
-      window.location.href = `${SERVER_URL}`
+      window.location.href = '/'
       // window.location.href = '/login'
 
 
