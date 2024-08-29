@@ -14,9 +14,9 @@ const app = express();
 // }));
 
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    // origin: process.env.CLIENT_URL || 'http://localhost:3000',
     // origin: 'http://localhost:3000',
-    // origin: 'https://chickickzz.netlify.app',
+    origin: 'https://chickickzz10.netlify.app/',
     credentials: true
 }));
 

@@ -15,7 +15,7 @@ export const DataProvider = ({ children }) => {
 
     const refToken = async () => {
         // const res = await axios.get('/user/refTokenn')
-        const res = await axios.post(`${SERVER_URL}/user/refTokenn`)
+        const res = await axios.post(`${SERVER_URL}/user/refToken`)
 
         // console.log(res)
         setToken(res.data.accesstoken)
