@@ -9,7 +9,7 @@ const routes = require('express').Router();
 routes.post('/signup',userCtrl.signup)
 routes.post('/login',userCtrl.login)
 routes.get('/logout',userCtrl.logout)
-routes.post('/refTokenn',userCtrl.refToken)
+routes.post('/refToken',userCtrl.refToken)
 routes.get('/info', auth, userCtrl.getUser)
 
 module.exports = routes
