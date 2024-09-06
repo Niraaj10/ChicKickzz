@@ -19,7 +19,10 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(`${SERVER_URL}/user/login`, { ...user })
+      const res = await axios.post(`${SERVER_URL}/user/login`, { ...user },
+        {
+            withCredentials: true
+        })
       // console.log({...user})
       // console.log(user)
 

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaRegEdit } from 'react-icons/fa'
 import { RiDeleteBin2Line } from 'react-icons/ri'
 import { Link } from 'react-router-dom'
@@ -8,8 +8,42 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 
 const ProductCard = ({ product, isAdmin }) => {
+  const [isLoading, setIsLoading] = useState(true); 
   const SERVER_URL = 'https://chickickzz-1.onrender.com';
   console.log(product)
+
+
+  useEffect(() => {
+    if (product) {
+      setIsLoading(false); 
+    }
+  }, [product]);
+
+  if (isLoading) {
+    return (
+      <div className='ProductCard z-40 flex flex-col bg-white rounded-3xl p-3'>
+        {/* Skeleton Structure while loading */}
+        <div className='flex flex-col gap-2'>
+          <div className='flex lg:flex-row md:flex-row flex-col'>
+            <div className='relative overflow-hidden rounded-2xl'>
+              <Skeleton className='lg:w-[6vw] lg:h-[12vh] rounded-2xl object-cover' />
+            </div>
+
+            <div className='py-3 px-4 w-48'>
+              <Skeleton width='100%' height={20} />
+              <Skeleton width='60%' height={15} className='mt-2' />
+              <Skeleton width='40%' height={15} className='mt-1' />
+            </div>
+          </div>
+
+          <div className='flex lg:flex-row flex-col lg:justify-center items-center gap-2'>
+            <Skeleton width='100px' height={40} />
+            {isAdmin && <Skeleton width='100px' height={40} />}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const deletePro = async (proId, proTitle) => {
     if (window.confirm(`You want to delete this product : ${proTitle}`)) {
