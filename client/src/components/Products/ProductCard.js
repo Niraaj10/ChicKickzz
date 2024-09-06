@@ -3,6 +3,9 @@ import React from 'react'
 import { FaRegEdit } from 'react-icons/fa'
 import { RiDeleteBin2Line } from 'react-icons/ri'
 import { Link } from 'react-router-dom'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 
 const ProductCard = ({ product, isAdmin }) => {
   const SERVER_URL = 'https://chickickzz-1.onrender.com';
@@ -40,13 +43,13 @@ const ProductCard = ({ product, isAdmin }) => {
               New
               </div> */}
 
-                <img src={product.images[0].url} alt="" className='lg:w-[6vw] lg:h-[12vh] rounded-2xl object-cover' loading='lazy' />
+                <img src={product.images[0].url || <Skeleton />} alt="" className='lg:w-[6vw] lg:h-[12vh] rounded-2xl object-cover' loading='lazy' />
 
               </div>
 
 
               <div className=' py-3 px-4 w-48'>
-                <h2 className='text-lg font-bold'>{product.title.toUpperCase()}</h2>
+                <h2 className='text-lg font-bold'>{product.title.toUpperCase() || <Skeleton />}</h2>
                 {/* <span>₹ {product.price}.00</span> */}
                 {/* <p>{product.description}</p> */}
                 <div className='text-gray-400'>
@@ -77,13 +80,13 @@ const ProductCard = ({ product, isAdmin }) => {
               New
             </div>
 
-            <img src={product.images[0].url} alt="" className='lg:w-[19vw] lg:h-[42vh] rounded-2xl object-cover' loading='lazy' />
+            <img src={product.images[0].url || <Skeleton />} alt="" className='lg:w-[19vw] lg:h-[42vh] rounded-2xl object-cover' loading='lazy' />
 
           </div>
 
 
           <div className=' py-3 px-4'>
-            <h2 className='text-lg font-bold'>{product.title.toUpperCase()}</h2>
+            <h2 className='text-lg font-bold'>{product.title.toUpperCase() || <Skeleton />}</h2>
             {/* <span>₹ {product.price}.00</span> */}
             {/* <p>{product.description}</p> */}
           </div>
@@ -91,7 +94,7 @@ const ProductCard = ({ product, isAdmin }) => {
 
           <div className='bg-black lg:text-base text-sm text-white p-2 flex  justify-center items-center  rounded-xl'>
             <Link to={`/products/${product._id}`} className='flex lg:flex-row flex-col'>
-              VIEW PRODUCT - <div>₹ {product.price}.00</div>
+              VIEW PRODUCT - <div>₹ {product.price || <Skeleton />}.00</div>
             </Link>
           </div>
 
