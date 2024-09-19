@@ -1,14 +1,26 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { GlobalState } from '../GlobalState'
 import nikeShoe from '../assests/img/nikeShoeHome.jpg'
 import { Link } from 'react-router-dom'
 import Products from './Products/products'
 import fire from '../assests/img/fire.png'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 
 const Home = () => {
     const state = useContext(GlobalState)
     const [isAdmin] = state.userAPI.isAdmin
 
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const loadingTimer = setTimeout(() => {
+            setIsLoading(false);
+        }, 5000);
+
+        return () => clearTimeout(loadingTimer);
+    }, []);
 
     return (
         <>
@@ -52,17 +64,67 @@ const Home = () => {
                             <img src={nikeShoe} alt="" className='border h-[65vh]  md:h-[70vh] w-[90vw] lg:h-[70vh] object-cover mx-auto rounded-[2rem] md:rounded-[3rem] lg:rounded-[3rem]' />
                         </div>
 
-                        <div>
+                        <div className='flex flex-col'>
                             <div className='text-[6vw] md:text-[4vw] lg:text-[4vw] font-bold mt-11 flex justify-center items-center mb-[-100px]'>
                                 DON'T MISS OUT NEW DROPS <img src={fire} alt="" className='w-[10vw] ml-[-25px] rotate-12' />
                             </div>
-                            <Products />
+
+
+                            <div className=''>
+
+                                {isLoading ? (
+                                    <>
+                                    <div className='mt-32 flex justify-center items-center gap-6'>
+
+                                    <div className='w-32 lg:w-[25vw] z-40 flex flex-col bg-white rounded-3xl p-3'>
+                                        {/* Skeleton Structure while loading */}
+                                        <div className='flex flex-col gap-2'>
+                                            <div className='flex lg:flex-row md:flex-row flex-col'>
+                                                <div className='relative overflow-hidden rounded-2xl'>
+                                                    <Skeleton  width='26vw' className='lg:w-[20vw] w-[6vw] h-[12vh] lg:h-[33vh] rounded-2xl object-cover' />
+                                                </div>
+                                            </div>
+
+                                            <div className='flex lg:flex-row flex-col lg:justify-center items-center gap-2'>
+                                                <Skeleton width='100px' height={40} />
+                                                {isAdmin && <Skeleton width='100px' height={40} />}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div className='w-32 lg:w-[25vw] z-40 flex flex-col bg-white rounded-3xl p-3'>
+                                        {/* Skeleton Structure while loading */}
+                                        <div className='flex flex-col gap-2'>
+                                            <div className='flex lg:flex-row md:flex-row flex-col'>
+                                                <div className='relative overflow-hidden rounded-2xl'>
+                                                    <Skeleton  width='23vw' className='lg:w-[20vw] w-[6vw] h-[12vh] lg:h-[33vh] rounded-2xl object-cover' />
+                                                </div>
+                                            </div>
+
+                                            <div className='flex lg:flex-row flex-col lg:justify-center items-center gap-2'>
+                                                <Skeleton width='100px' height={40} />
+                                                {isAdmin && <Skeleton width='100px' height={40} />}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                   
+                                    </div>
+                                    </>
+                                ) : (
+                                    <Products />
+                                )}
+                            </div>
+
+                            {/* <Products /> */}
                         </div>
                     </>
                 }
 
 
-{/* <div>
+                {/* <div>
     <ProCret />
 </div> */}
 

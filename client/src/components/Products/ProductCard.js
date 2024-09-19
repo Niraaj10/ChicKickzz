@@ -14,9 +14,12 @@ const ProductCard = ({ product, isAdmin }) => {
 
 
   useEffect(() => {
-    if (product) {
-      setIsLoading(false); 
-    }
+    // if (!product || Object.keys(product).length === 0) {
+    //   setIsLoading(true); 
+    // } else {
+    //   setIsLoading(false);
+    // }
+    setIsLoading(!product || !product.images || !product.title);
   }, [product]);
 
   if (isLoading) {
@@ -138,6 +141,11 @@ const ProductCard = ({ product, isAdmin }) => {
 
     </div>
   )
+
 }
 
 export default ProductCard
+
+
+
+
