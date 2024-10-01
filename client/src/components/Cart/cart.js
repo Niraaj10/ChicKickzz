@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import axios from 'axios'
 import { GlobalState } from '../../GlobalState'
 import { Link } from 'react-router-dom'
 import fire from '../img/fire.png'
@@ -6,7 +7,10 @@ import { RiDeleteBinLine } from 'react-icons/ri'
 
 const Cart = () => {
   const state = useContext(GlobalState)
+  const SERVER_URL = 'http://localhost:5000';
   const [cart, setCart] = state.userAPI.cart
+  console.log(cart)
+
 
   const totalItems = cart.reduce((total, pro) => total + pro.quantity, 0);
 
@@ -16,8 +20,29 @@ const Cart = () => {
     return tPrice * gstRate;
   };
 
+  const TotalPriceWithGST = Math.floor(calGST(tPrice) + tPrice);
+  console.log(TotalPriceWithGST)
 
-  // console.log(cart)
+
+  const handlePayment = async () => {
+    try {
+      const res = await axios.post(`${SERVER_URL}/api/payment/create`, { cart, TotalPriceWithGST },{
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log(res.data);
+
+      if (res && res.data.links && res.data.links[1].href) {
+        window.location.href = res.data.links[1].href; 
+      }
+
+    } catch (error) {
+      console.error("Payment error: ", error.response?.data || error);
+    }
+  };
+
 
 
   // const IncQnt = (proId) => {
@@ -93,7 +118,7 @@ const Cart = () => {
 
                     {
                       cart.map(pro => (
-                        <div className='grid grid-cols-2 lg:flex lg:flex-row gap-2'>
+                        <div key={pro._id} className='grid grid-cols-2 lg:flex lg:flex-row gap-2'>
 
                           <div className='lg:basis-[30%]'>
                             <Link to={`/products/${pro._id}`}>
@@ -144,6 +169,7 @@ const Cart = () => {
 
           </div>
 
+
           <div className='basis-[30%] relative px-6  p-9 '>
             <div className='sticky top-44'>
 
@@ -173,7 +199,7 @@ const Cart = () => {
                 </div>
 
                 {/* <button>CHECKOUT</button> */}
-                <button className='bg-black font-bold text-white w-full p-3 rounded-xl '>BUY NOW</button>
+                <button onClick={handlePayment} className='bg-black font-bold text-white w-full p-3 rounded-xl '>BUY NOW</button>
               </div>
             </div>
           </div>
