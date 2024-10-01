@@ -7,8 +7,8 @@ import UserAPI from "./api/UserAPI";
 export const GlobalState = createContext();
 
 export const DataProvider = ({ children }) => {
-    const SERVER_URL = 'https://chickickzz-1.onrender.com';
     // const SERVER_URL = 'https://chickickzz-1.onrender.com';
+    const SERVER_URL = 'http://localhost:5000';
     // productAPI();
 
     // const [token, setToken] = useState(false);

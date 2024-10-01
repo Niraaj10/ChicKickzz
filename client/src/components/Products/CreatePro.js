@@ -4,7 +4,8 @@ import axios from 'axios';
 import { CircularProgress } from '@mui/material';
 
 const CreatePro = () => {
-    const SERVER_URL = 'https://chickickzz-1.onrender.com';
+    // const SERVER_URL = 'https://chickickzz-1.onrender.com';
+    const SERVER_URL = 'http://localhost:5000';
     const inputRef = useRef(null);
     const [imgPreviews, setImgPreviews] = useState([]);
     const [loading, setLoading] = useState(false);

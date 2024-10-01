@@ -9,7 +9,8 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 const ProductCard = ({ product, isAdmin }) => {
   const [isLoading, setIsLoading] = useState(true); 
-  const SERVER_URL = 'https://chickickzz-1.onrender.com';
+  // const SERVER_URL = 'https://chickickzz-1.onrender.com';
+  const SERVER_URL = 'http://localhost:5000';
   console.log(product)
 
 

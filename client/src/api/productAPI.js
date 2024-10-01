@@ -3,7 +3,8 @@ import axios from 'axios'
 
 const ProductAPI = () => {
   
-  const SERVER_URL = 'https://chickickzz-1.onrender.com';
+  // const SERVER_URL = 'https://chickickzz-1.onrender.com';
+  const SERVER_URL = 'http://localhost:5000';
     const [products,setProducts]=useState([])
 
     const getProducts = async()=> {

@@ -14,8 +14,8 @@ const app = express();
 // }));
 
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
-    // origin: 'http://localhost:3000',
+    // origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin: 'http://localhost:3000',
     // origin: 'https://chickickzz10.netlify.app',
     credentials: true
 }));
@@ -31,7 +31,7 @@ app.use(fileUpload({
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log("SERVER IS RUNNING.....")
+    console.log("SERVER IS RUNNING.....", {PORT})
 })
 
 app.get('/', (req,res) => {
@@ -44,6 +44,7 @@ app.use('/user',require('./routes/useRouter'))
 app.use('/api',require('./routes/categoryRoutes'))
 app.use('/api',require('./routes/productRoutes'))
 app.use('/api',require('./routes/upload'))
+app.use('/api',require("./routes/payment"))
 
 
 //connect to mongoDb

@@ -12,7 +12,8 @@ import { AiOutlineAppstore, AiOutlineAppstoreAdd } from 'react-icons/ai'
 
 
 const Navbar = () => {
-    const SERVER_URL = 'https://chickickzz-1.onrender.com';
+    // const SERVER_URL = 'https://chickickzz-1.onrender.com';
+    const SERVER_URL = 'http://localhost:5000';
     const state = useContext(GlobalState)
     // console.log(state)
 
