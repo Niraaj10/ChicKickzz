@@ -10,6 +10,7 @@ import { DataProvider } from './GlobalState';
 import ProductDetails from './components/Products/ProductDetails';
 import CreatePro from './components/Products/CreatePro';
 import Footer from './components/footerr/Footer';
+import Success from './components/payment/Success';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
               <Route path='/login' element={<Login />} />
               <Route path='/signup' element={<Signup />} />
               <Route path='/cart' element={<Cart />} />
+              <Route path='/cart/success/:paymentId' element={<Success />} />
               <Route path='/products/:id' element={<ProductDetails />} />
               <Route path='/products/create' element={<CreatePro />} />
 

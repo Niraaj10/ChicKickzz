@@ -48,8 +48,10 @@ const payCtrl = {
                     "payment_method": "paypal"
                 },
                 "redirect_urls": {
-                    "return_url": "http://localhost:3000/cart/success",
+                    // "return_url": "http://localhost:3000/cart/success",
+                    "return_url": `http://localhost:5000/api/payment/success?total=${total}`,
                     "cancel_url": "http://localhost:3000/cart/failed"
+                    // "cancel_url": "http://localhost:5000/cart/payment/failed"
                 },
                 "transactions": [{
                     "item_list": {
@@ -81,6 +83,41 @@ const payCtrl = {
 
     
     },
+
+
+    paymentSuccess: async (req, res) => {
+        try {
+            const payerId = req.query.PayerID;
+            const paymentId = req.query.paymentId;
+            const total = req.query.total;
+    
+            
+            const express_checkout_json = {
+                "payer_id": payerId,
+                "transactions": [{
+                    "amount": {
+                        "currency": "USD",
+                        "total": total 
+                    },
+                    "description": "This is the payment description."
+                }]
+            };
+    
+            paypal.payment.execute(paymentId, express_checkout_json, function (error, payment) {
+                if (error) {
+                    console.log(error);
+                    return res.redirect("http://localhost:3000/cart/failed");
+                } else {
+                    // Redirect to the frontend success page with parameters
+                    return res.redirect(`http://localhost:3000/cart/success/${paymentId}`);
+                }
+            });
+        } catch (error) {
+            console.log(error);
+            res.status(500).send("Server Error");
+        }
+
+    }
 
 
     
