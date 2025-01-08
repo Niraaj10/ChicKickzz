@@ -6,43 +6,55 @@ import fire from '../img/fire.png'
 import { RiDeleteBinLine } from 'react-icons/ri'
 
 const Cart = () => {
-  const state = useContext(GlobalState)
-  const SERVER_URL = 'http://localhost:5000';
-  const [cart, setCart] = state.userAPI.cart
-  console.log(cart)
+  const state = useContext(GlobalState);
+  // const SERVER_URL = 'http://localhost:5000';
+  const SERVER_URL = 'https://chickickzz-1.onrender.com';
+  const [cart, setCart] = state?.userAPI?.cart || [[], () => {}];
 
+  console.log('Cart:', cart);
 
-  const totalItems = cart.reduce((total, pro) => total + pro.quantity, 0);
+  const totalItems = cart.reduce((total, pro) => total + (pro.quantity || 0), 0);
 
-  const tPrice = cart.reduce((total, pro) => total + pro.price * pro.quantity, 0);
+  const tPrice = cart.reduce((total, pro) => total + (pro.price * pro.quantity || 0), 0);
+
   const calGST = (tPrice) => {
     const gstRate = 0.12; // 12% GST
     return tPrice * gstRate;
   };
 
-  const TotalPriceWithGST = Math.floor(calGST(tPrice) + tPrice);
-  console.log(TotalPriceWithGST)
+  // const TotalPriceWithGST = Math.floor(calGST(tPrice) + tPrice).toFixed(2);
+  const TotalPriceWithGST = (calGST(tPrice) + tPrice).toFixed(2)
+  console.log('Total Price with GST:', TotalPriceWithGST);
 
-
+  // Handle payment function
   const handlePayment = async () => {
+    if (!cart.length) {
+      console.error('Cart is empty. Cannot proceed with payment.');
+      return;
+    }
+
     try {
-      const res = await axios.post(`${SERVER_URL}/api/payment/create`, { cart, TotalPriceWithGST },{
-        headers: {
-          'Content-Type': 'application/json'
+      const res = await axios.post(
+        `${SERVER_URL}/api/payment/create`,
+        { cart, TotalPriceWithGST },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          }
         }
-      });
+      );
 
-      console.log(res.data);
+      console.log('Payment Response:', res.data);
 
-      if (res && res.data.links && res.data.links[1].href) {
-        window.location.href = res.data.links[1].href; 
+      if (res && res.data.links && res.data.links[1]?.href) {
+        window.location.href = res.data.links[1].href;
+      } else {
+        console.error('PayPal approval link not found in the response.');
       }
-
     } catch (error) {
-      console.error("Payment error: ", error.response?.data || error);
+      console.error('Payment error:', error.response?.data || error);
     }
   };
-
 
 
   // const IncQnt = (proId) => {

@@ -2,8 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react';
 
 const FileUploadComponent = () => {
-    // const SERVER_URL = 'https://chickickzz-1.onrender.com';
-    const SERVER_URL = 'http://localhost:5000';
+    const SERVER_URL = 'https://chickickzz-1.onrender.com';
+    // const SERVER_URL = 'http://localhost:5000';
     const [imgPreviews, setImgPreviews] = useState([]); // Assuming imgPreviews is an array of File objects
 
     const handleFileChange = (e) => {
